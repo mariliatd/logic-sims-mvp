@@ -1,5 +1,5 @@
 <template>
-    <NavBar/>
+    <NavBar simName="Nome da Sim"/>
 </template>
 
 <script setup lang="ts">
