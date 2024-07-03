@@ -25,8 +25,6 @@ const props = defineProps({
 </script>
 
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles:wght@400;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
-
 .counter-box {
   display: flex;
   flex-direction: column;
@@ -35,9 +33,6 @@ const props = defineProps({
 }
 
 .label-text {
-  font-family: "Roboto", sans-serif;
-  font-size: 1.4rem;
-  color: #1d2d44;
   text-align: center;
   margin-bottom: 0.2rem;
 }
@@ -53,10 +48,8 @@ const props = defineProps({
 }
 
 .text {
-  font-family: "Roboto", sans-serif;
   font-size: 1.6rem;
   text-align: center;
-  color: #1d2d44;
   padding: 0.5rem 0.7rem;
 }
 </style>
