@@ -1,11 +1,7 @@
 <template>
-  <NavBar simName="Nome da Sim" />
-  <SimPageTemplate />
+  <PartyPlanning />
 </template>
 
 <script setup lang="ts">
-import NavBar from "./components/NavBar.vue";
-import SimPageTemplate from "./components/SimPageTemplate.vue";
+import PartyPlanning from "./simulations/party_planning.vue";
 </script>
-
-<style scoped></style>
