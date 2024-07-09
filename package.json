@@ -17,7 +17,8 @@
   "devDependencies": {
     "@mdi/font": "^7.4.47",
     "@tsconfig/node20": "^20.1.4",
-    "@types/node": "^20.12.5",
+    "@types/node": "^20.14.9",
+    "@types/webpack-env": "^1.18.5",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vue/tsconfig": "^0.5.1",
     "npm-run-all2": "^6.1.2",
