@@ -2,6 +2,7 @@
   <NavBar simName="Planejando a Festa" />
   <SimPageTemplate>
     <template #workspace> </template>
+    <template #pseudocode> </template>
   </SimPageTemplate>
 </template>
 
@@ -19,7 +20,7 @@ export default defineComponent({
     SimPageTemplate,
   },
   data: () => ({
-    cards: [
+    items: [
       {
         name: "birthday_cake",
         text: "bolo de aniversário",

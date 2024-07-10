@@ -3,20 +3,11 @@
     <p class="label-text">{{ label }}</p>
     <div class="control">
       <v-row>
-        <v-col v-for="card in content" :key="card.name" :cols="card.size">
-          <v-card variant="text">
-            <v-card-actions>
-              <img
-                :src="card.path"
-                :alt="card.text"
-                width="80px"
-                height="80px"
-                @click="choosenItem = card.name"
-                class="card-img"
-              />
-            </v-card-actions>
-            <p class="card-label">{{ card.label }}</p>
-          </v-card>
+        <v-col v-for="item in content" :key="item.name" :cols="item.size">
+          <div class="item-box choosen-item" @click="choosenItem = item.name">
+            <img :src="item.path" :alt="item.text" width="80px" height="80px" />
+            <p class="item-label">{{ item.label }}</p>
+          </div>
         </v-col>
       </v-row>
     </div>
@@ -61,15 +52,24 @@ export default defineComponent({
   width: 350px;
   height: 150px;
   display: flex;
-  justify-content: center;
   align-items: center;
 }
 
-.card-img {
+.choosen-item {
   cursor: pointer;
 }
 
-.card-label {
+.choosen-item:hover {
+  background-color: #e9e8e8;
+}
+
+.item-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.item-label {
   text-align: center;
 }
 </style>
