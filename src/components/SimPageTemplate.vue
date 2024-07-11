@@ -7,7 +7,9 @@
             <div class="sim-workspace">
               <slot name="workspace"></slot>
             </div>
-            <v-icon icon="mdi-restore" size="60px" class="restore-sim"></v-icon>
+            <div class="restore-sim">
+              <v-icon icon="mdi-restore" size="60px"></v-icon>
+            </div>
           </div>
         </v-col>
         <v-col cols="4">
@@ -54,7 +56,8 @@ body {
 }
 
 .restore-sim {
-  bottom: -6rem;
+  position: fixed;
+  bottom: 6rem;
   align-self: flex-end;
 }
 

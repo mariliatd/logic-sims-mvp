@@ -6,9 +6,6 @@
         <div class="conditional-control">
           <ConditionalControl label="itemEscolhido" :content="items" />
         </div>
-        <div class="loop-counter">
-          <LoopCounter label="totalPronto" />
-        </div>
       </div>
     </template>
     <template #pseudocode>
@@ -29,12 +26,10 @@ import { defineComponent } from "vue";
 import ConditionalControl from "../components/ConditionalControl.vue";
 import NavBar from "../components/NavBar.vue";
 import SimPageTemplate from "../components/SimPageTemplate.vue";
-import LoopCounter from "@/components/LoopCounter.vue";
 
 export default defineComponent({
   components: {
     ConditionalControl,
-    LoopCounter,
     NavBar,
     SimPageTemplate,
   },
@@ -70,11 +65,6 @@ export default defineComponent({
 .sim-workspace {
   display: flex;
   flex-direction: column;
-}
-
-.loop-counter {
-  align-self: flex-end;
-  margin-top: 15rem;
 }
 
 .initial-code {
