@@ -11,7 +11,15 @@
         </div>
       </div>
     </template>
-    <template #pseudocode> </template>
+    <template #pseudocode>
+      <div class="initial-code">
+        <p class="pseudocode">// variável</p>
+        <p class="pseudocode">
+          total <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 0
+        </p>
+        <p id="running">leia (itemEscolhido)</p>
+      </div>
+    </template>
   </SimPageTemplate>
 </template>
 
@@ -67,5 +75,20 @@ export default defineComponent({
 .loop-counter {
   align-self: flex-end;
   margin-top: 15rem;
+}
+
+.initial-code {
+  margin: 1.2rem;
+}
+
+.pseudocode {
+  padding-left: 1rem;
+}
+
+#running {
+  background-color: #e9e8e8;
+  border-radius: 1rem;
+  padding: 0.2rem 1rem;
+  margin-top: 0.5rem;
 }
 </style>
