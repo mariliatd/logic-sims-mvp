@@ -4,7 +4,10 @@
       <v-row>
         <v-col cols="8">
           <div class="sim-box">
-            <slot name="workspace"></slot>
+            <div class="sim-workspace">
+              <slot name="workspace"></slot>
+            </div>
+            <v-icon icon="mdi-restore" size="60px" class="restore-sim"></v-icon>
           </div>
         </v-col>
         <v-col cols="4">
@@ -45,13 +48,21 @@ body {
 }
 
 .sim-box {
+  display: flex;
+  flex-direction: column;
   margin: 1.2rem;
+}
+
+.restore-sim {
+  bottom: -6rem;
+  align-self: flex-end;
 }
 
 .code-box {
   border: solid 0.12rem #1d2d44;
   border-radius: 1rem;
   margin: 1.2rem;
+  height: 85%;
 }
 
 .sub-title {

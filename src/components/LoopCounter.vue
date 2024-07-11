@@ -7,7 +7,7 @@
         style="min-width: 0; left: 0.5rem; margin-right: 0.5rem; padding: 0"
         @click="count++"
       >
-        <v-icon icon="mdi-plus-box-outline" size="30px"></v-icon>
+        <v-icon icon="mdi-plus-box-outline" size="35px"></v-icon>
       </v-btn>
       <span class="text">{{ count }}</span>
     </div>
@@ -29,7 +29,6 @@ const props = defineProps({
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: fixed;
 }
 
 .label-text {
@@ -40,15 +39,16 @@ const props = defineProps({
 .counter {
   border: solid 0.12rem #1d2d44;
   border-radius: 1rem;
-  width: 90px;
-  height: 60px;
+  background-color: #e9e8e8;
+  width: 100px;
+  height: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .text {
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   text-align: center;
   padding: 0.5rem 0.7rem;
 }

@@ -38,7 +38,6 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: fixed;
 }
 
 .label-text {
@@ -49,6 +48,7 @@ export default defineComponent({
 .control {
   border: solid 0.12rem #1d2d44;
   border-radius: 1rem;
+  background-color: #e9e8e8;
   width: 350px;
   height: 150px;
   display: flex;
@@ -60,7 +60,8 @@ export default defineComponent({
 }
 
 .choosen-item:hover {
-  background-color: #e9e8e8;
+  background-color: #d9d9d9;
+  border-radius: 1rem;
 }
 
 .item-box {
