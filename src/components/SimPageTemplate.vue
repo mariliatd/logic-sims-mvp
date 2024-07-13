@@ -8,7 +8,11 @@
               <slot name="workspace"></slot>
             </div>
             <div class="restore-sim">
-              <v-icon icon="mdi-restore" size="60px"></v-icon>
+              <v-icon
+                icon="mdi-restore"
+                size="60px"
+                @click="restoreSim()"
+              ></v-icon>
             </div>
           </div>
         </v-col>
@@ -23,7 +27,17 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  methods: {
+    restoreSim() {
+      this.$emit("sim");
+    },
+  },
+});
+</script>
 
 <style>
 * {

@@ -1,6 +1,6 @@
 <template>
   <NavBar simName="Planejando a Festa" />
-  <SimPageTemplate>
+  <SimPageTemplate @sim="restoreSim()">
     <template #workspace>
       <div class="sim-workspace">
         <div class="conditional-control">
@@ -119,6 +119,11 @@ export default defineComponent({
     },
     isRunning(codeState: string) {
       return codeState == this.currentState;
+    },
+    restoreSim() {
+      this.currentState = "initial";
+      this.selectedItem = "";
+      this.total = 0;
     }
   },
 });
