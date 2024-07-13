@@ -69,6 +69,7 @@ body {
 }
 
 .sub-title {
+  font-size: 1.6rem;
   text-align: center;
   background-color: #eccbdf;
   border-radius: 1rem;

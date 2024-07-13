@@ -4,7 +4,7 @@
     <div class="control">
       <v-row>
         <v-col v-for="item in content" :key="item.name" :cols="item.size">
-          <div class="item-box choosen-item" @click="choosenItem = item.name">
+          <div class="item-box choosen-item" @click="selectItem(item)">
             <img :src="item.path" :alt="item.text" width="80px" height="80px" />
             <p class="item-label">{{ item.label }}</p>
           </div>
@@ -28,8 +28,14 @@ export default defineComponent({
     },
   },
   data: () => ({
-    choosenItem: "",
+    selectedItem: "",
   }),
+  methods: {
+    selectItem(item: ConditionalCard) {
+      this.selectedItem = item.name;
+      this.$emit("item", item.name);
+    },
+  },
 });
 </script>
 
