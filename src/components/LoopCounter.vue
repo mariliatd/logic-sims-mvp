@@ -5,7 +5,7 @@
       <v-btn
         variant="text"
         style="min-width: 0; left: 0.5rem; margin-right: 0.5rem; padding: 0"
-        @click="count++"
+        @click="incrementCounter()"
       >
         <v-icon icon="mdi-plus-box-outline" size="35px"></v-icon>
       </v-btn>
@@ -14,13 +14,22 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref } from "vue";
+<script lang="ts">
+import { defineComponent } from "vue";
 
-const count = ref(0);
-
-const props = defineProps({
-  label: { type: String, required: true },
+export default defineComponent({
+  props: {
+    label: { type: String, required: true },
+  },
+  data: () => ({
+    count: 0,
+  }),
+  methods: {
+    incrementCounter() {
+      this.count++;
+      this.$emit("totalPrepared", this.count);
+    },
+  },
 });
 </script>
 

@@ -28,12 +28,12 @@
           </div>
         </div>
         <div v-if="selectedItem != ''" class="loop-counter">
-          <LoopCounter label="totalPronto" />
+          <LoopCounter label="totalAPreparar" @totalPrepared="prepareItem" />
         </div>
       </div>
     </template>
     <template #pseudocode>
-      <div class="initial-code">
+      <div class="indent-code">
         <p class="pseudocode">
           total <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 0
         </p>
@@ -98,10 +98,11 @@ export default defineComponent({
     ],
     selectedItem: "",
     total: 0,
+    totalToPrepare: 0,
   }),
   methods: {
     selectItem(value: string) {
-      console.log(value);
+      console.log('selected item', value);
       this.selectedItem = value;
 
       if (this.selectedItem == "birthday_cake") {
@@ -116,6 +117,10 @@ export default defineComponent({
       } else {
         console.error("No item selected");
       }
+    },
+    prepareItem(value: number) {
+      console.log('total to prepare', value);
+      this.totalToPrepare = value;
     },
     isRunning(codeState: string) {
       return codeState == this.currentState;
@@ -144,7 +149,7 @@ export default defineComponent({
   margin-top: -27rem;
 }
 
-.initial-code {
+.indent-code {
   margin: 1.2rem;
 }
 

@@ -79,7 +79,7 @@ body {
   border: solid 0.12rem #1d2d44;
   border-radius: 1rem;
   margin: 1.2rem;
-  height: 85%;
+  height: 85%; /* TODO: fix responsivity */
 }
 
 .sub-title {
