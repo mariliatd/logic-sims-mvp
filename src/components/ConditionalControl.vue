@@ -4,10 +4,13 @@
     <div class="control">
       <v-row>
         <v-col v-for="item in content" :key="item.name" :cols="item.size">
-          <div class="item-box choosen-item" @click="selectItem(item)">
+          <button
+            @click="selectItem(item)"
+            :disabled="selectedItem !== '' && item.name !== selectedItem"
+          >
             <img :src="item.path" :alt="item.text" width="80px" height="80px" />
             <p class="item-label">{{ item.label }}</p>
-          </div>
+          </button>
         </v-col>
       </v-row>
     </div>
@@ -26,14 +29,11 @@ export default defineComponent({
       require: true,
       default: () => [],
     },
+    selectedItem: { type: String, required: true },
   },
-  data: () => ({
-    selectedItem: "",
-  }),
   methods: {
     selectItem(item: ConditionalCard) {
-      this.selectedItem = item.name;
-      this.$emit("item", item.name);
+      this.$emit("selectedItem", item.name);
     },
   },
 });
@@ -55,19 +55,25 @@ export default defineComponent({
   border: solid 0.12rem #1d2d44;
   border-radius: 1rem;
   background-color: #e9e8e8;
-  width: 350px;
-  height: 150px;
+  width: 360px;
+  height: 160px;
   display: flex;
   align-items: center;
+  padding: 0 0.5rem;
 }
 
-.choosen-item {
-  cursor: pointer;
+button {
+  padding: 0.5rem;
 }
 
-.choosen-item:hover {
+button:hover:enabled {
   background-color: #d9d9d9;
   border-radius: 1rem;
+}
+
+button:disabled {
+  border-radius: 1rem;
+  opacity: 0.5;
 }
 
 .item-box {

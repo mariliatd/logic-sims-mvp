@@ -7,7 +7,8 @@
           <ConditionalControl
             label="itemEscolhido"
             :content="items"
-            @item="selectItem"
+            @selectedItem="selectItem"
+            :selectedItem="selectedItem"
           />
         </div>
         <div v-if="selectedItem == 'birthday_cake'" class="loop-counter-object">
@@ -33,7 +34,6 @@
     </template>
     <template #pseudocode>
       <div class="initial-code">
-        <p class="pseudocode">// variável</p>
         <p class="pseudocode">
           total <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 0
         </p>
