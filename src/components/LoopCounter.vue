@@ -20,13 +20,16 @@ import { defineComponent } from "vue";
 export default defineComponent({
   props: {
     label: { type: String, required: true },
+    total: { type: Number, required: true },
   },
   data: () => ({
     count: 0,
   }),
   methods: {
     incrementCounter() {
-      this.count++;
+      if (this.count < this.total) {
+        this.count++;
+      }
       this.$emit("totalPrepared", this.count);
     },
   },
