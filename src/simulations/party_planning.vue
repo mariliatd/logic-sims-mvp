@@ -41,28 +41,35 @@
           </div>
         </div>
         <div v-if="selectedItem != ''" class="loop-counter">
-          <LoopCounter label="totalAPreparar" @totalPrepared="prepareItem" :total="total"/>
+          <LoopCounter label="totalPronto" @totalPrepared="prepareItem" :total="total"/>
         </div>
       </div>
     </template>
     <template #pseudocode>
       <div class="indent-code">
         <p class="pseudocode">
-          total <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 0
+          quantidade <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 0
         </p>
         <p :class="['pseudocode', isRunning('initial') ? 'running' : '']"><b>leia</b> (itemEscolhido)</p>
-        <p :class="['pseudocode', isRunning('conditional_cake') ? 'running' : '']" v-if="selectedItem != ''">
+        <p :class="['pseudocode', isRunning('conditional_cake') ? 'running' : '']">
           <b>se</b> itemEscolhido = "bolo" <b>então</b> <br />
-          <p class="pl-7">total <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 1</p>
+          <p class="pl-7">quantidade <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 1</p>
         </p>
-        <p :class="['pseudocode', isRunning('conditional_balloon') ? 'running' : '']" v-if="selectedItem != ''">
+        <p :class="['pseudocode', isRunning('conditional_balloon') ? 'running' : '']">
           <b>senão</b> <br />
           <p class="pl-7"><b>se</b> itemEscolhido = "balão" <b>então</b> <br /></p>
-          <p class="pl-14">total <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 10</p>
+          <p class="pl-14">quantidade <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 10</p>
         </p>
-        <p :class="['pseudocode', isRunning('conditional_candy') ? 'running' : '']" v-if="selectedItem != ''">
+        <p :class="['pseudocode', isRunning('conditional_candy') ? 'running' : '']">
           <p class="pl-7"><b>senão</b> <br /></p>
-          <p class="pl-14">total <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 20</p>
+          <p class="pl-14">quantidade <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 20</p>
+        </p>
+        <p class="pseudocode">
+          totalPronto <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 0
+        </p>
+        <p class="pseudocode">
+          <b>enquanto</b> totalPronto < quantidade <b>faça</b>
+          <p class="pl-7"> totalPronto <v-icon icon="mdi-arrow-left" size="20px"></v-icon> totalPronto + 1</p>
         </p>
       </div>
     </template>
@@ -188,6 +195,7 @@ export default defineComponent({
 #candy-box {
   display: flex;
   width: 50%;
+  margin-left: 8rem;
 }
 
 #candy-prepared {
