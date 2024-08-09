@@ -18,21 +18,21 @@
 </template>
 
 <script lang="ts">
-import type { ConditionalCard } from "@/types";
+import type { ItemCard } from "@/types";
 import { defineComponent, type PropType } from "vue";
 
 export default defineComponent({
   props: {
     label: { type: String, required: true },
     content: {
-      type: Array as PropType<Array<ConditionalCard>>,
+      type: Array as PropType<Array<ItemCard>>,
       require: true,
       default: () => [],
     },
     selectedItem: { type: String, required: true },
   },
   methods: {
-    selectItem(item: ConditionalCard) {
+    selectItem(item: ItemCard) {
       this.$emit("selectedItem", item.name);
     },
   },

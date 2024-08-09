@@ -1,4 +1,4 @@
-export interface ConditionalCard {
+export interface ItemCard {
   name: string;
   text: string;
   path: string;
