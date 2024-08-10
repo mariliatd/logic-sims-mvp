@@ -1,15 +1,13 @@
 <template>
-  <div v-if="selectedItem == 'birthday_cake'" class="counter-box">
-    <div>
-      <img
-        src="../assets/bake.svg"
-        alt="fogão"
-        width="200px"
-        height="200px"
-        @click="incrementCounter()"
-        class="counter-increment"
-      />
-    </div>
+  <div v-if="selectedItem == 'birthday_cake'" id="bake-cake">
+    <img
+      src="../assets/bake.svg"
+      alt="fogão"
+      width="200px"
+      height="200px"
+      @click="incrementCounter()"
+      class="counter-increment"
+    />
     <div v-for="index in totalPrepared" :key="index" id="cake-prepared">
       <img
         src="../assets/birthday-cake.svg"
@@ -98,12 +96,12 @@ export default defineComponent({
 </script>
 
 <style>
-.counter-box {
-  display: flex;
-}
-
 .counter-increment {
   cursor: pointer;
+}
+
+#bake-cake {
+  display: flex;
 }
 
 #cake-prepared {
@@ -114,13 +112,13 @@ export default defineComponent({
 #balloon-box {
   margin-left: 25%;
   display: flex;
-  flex-wrap: wrap;
   width: 50%;
   gap: 6rem 0;
   justify-content: center;
 }
 
 #balloon-prepared {
+  align-self: flex-start;
   margin-top: -20rem;
   margin-left: -2rem;
 }
@@ -133,11 +131,11 @@ export default defineComponent({
 
 #candy-box {
   display: flex;
-  width: 50%;
-  margin-left: 6rem;
+  justify-content: center;
 }
 
 #candy-prepared {
+  align-self: flex-start;
   margin-top: -11.3rem;
   margin-left: -2rem;
 }

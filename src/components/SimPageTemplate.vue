@@ -67,6 +67,7 @@ body {
   display: flex;
   flex-direction: column;
   margin: 1.2rem;
+  height: 85%; /* TODO: fix responsivity */
 }
 
 .restore-sim {

@@ -3,16 +3,17 @@
   <SimPageTemplate @sim="restoreSim()">
     <template #workspace>
       <div class="sim-workspace">
-        <div class="conditional-control">
-          <ConditionalControl
-            label="itemEscolhido"
-            :content="items"
-            @selectedItem="selectItem"
-            :selectedItem="selectedItem"
-          />
-        </div>
-        <div v-if="selectedItem != ''" class="loop-counter-object">
+        <ConditionalControl
+          label="itemEscolhido"
+          :content="items"
+          @selectedItem="selectItem"
+          :selectedItem="selectedItem"
+        />
+        <div v-if="selectedItem !== ''" class="loop-counter">
           <LoopCounter :selectedItem="selectedItem" :total="total" @totalPrepared="prepareItem" :totalPrepared="totalPrepared"/>
+        </div>
+        <div v-if="selectedItem !== ''" class="variable-display">
+          <VariableDisplay label="totalPronto" :value="totalPrepared" />
         </div>
       </div>
     </template>
@@ -54,6 +55,7 @@ import ConditionalControl from "../components/ConditionalControl.vue";
 import NavBar from "../components/NavBar.vue";
 import SimPageTemplate from "../components/SimPageTemplate.vue";
 import LoopCounter from "@/components/LoopCounter.vue";
+import VariableDisplay from "@/components/VariableDisplay.vue";
 
 export default defineComponent({
   components: {
@@ -61,6 +63,7 @@ export default defineComponent({
     LoopCounter,
     NavBar,
     SimPageTemplate,
+    VariableDisplay,
   },
   data: () => ({
     currentState: "initial",
@@ -130,16 +133,17 @@ export default defineComponent({
 .sim-workspace {
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
-.loop-counter-object {
+.loop-counter {
   margin: 15rem 5rem;
 }
 
-/* .variable-display {
+.variable-display {
   align-self: flex-end;
   margin-top: -27rem;
-} */
+}
 
 .indent-code {
   margin: 1.2rem;
