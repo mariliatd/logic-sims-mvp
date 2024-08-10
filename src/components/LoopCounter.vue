@@ -112,7 +112,9 @@ export default defineComponent({
 #balloon-box {
   margin-left: 25%;
   display: flex;
+  flex-wrap: wrap;
   width: 50%;
+  height: 0;
   gap: 6rem 0;
   justify-content: center;
 }

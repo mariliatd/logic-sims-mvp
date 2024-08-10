@@ -2,7 +2,7 @@
   <div class="variable-box">
     <p class="label-text">{{ label }}</p>
     <div class="variable">
-      <span class="text">{{ value }}</span>
+      <span :class="[isString(value) ? 'text' : 'number']">{{ value }}</span>
     </div>
   </div>
 </template>
@@ -13,7 +13,12 @@ import { defineComponent } from "vue";
 export default defineComponent({
   props: {
     label: { type: String, required: true },
-    value: { type: Number, required: true },
+    value: { type: [Number, String], required: true },
+  },
+  methods: {
+    isString(value: number | string): boolean {
+      return typeof value === "string";
+    },
   },
 });
 </script>
@@ -42,6 +47,10 @@ export default defineComponent({
 }
 
 .text {
+  font-size: 1.6rem;
+}
+
+.number {
   font-size: 1.8rem;
 }
 </style>

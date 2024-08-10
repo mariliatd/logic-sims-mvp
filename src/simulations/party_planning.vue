@@ -3,16 +3,20 @@
   <SimPageTemplate @sim="restoreSim()">
     <template #workspace>
       <div class="sim-workspace">
-        <ConditionalControl
-          label="itemEscolhido"
-          :content="items"
-          @selectedItem="selectItem"
-          :selectedItem="selectedItem"
-        />
-        <div v-if="selectedItem !== ''" class="loop-counter">
-          <LoopCounter :selectedItem="selectedItem" :total="total" @totalPrepared="prepareItem" :totalPrepared="totalPrepared"/>
+        <div class="conditional-loop-box">
+          <ConditionalControl
+            label="itemEscolhido"
+            :content="items"
+            @selectedItem="selectItem"
+            :selectedItem="selectedItem"
+          />
+          <div v-if="selectedItem !== ''" class="loop-counter">
+            <LoopCounter :selectedItem="selectedItem" :total="total" @totalPrepared="prepareItem" :totalPrepared="totalPrepared"/>
+          </div>
         </div>
-        <div v-if="selectedItem !== ''" class="variable-display">
+        <div class="variable-display">
+          <VariableDisplay label="quantidade" :value="total" />
+          <VariableDisplay label="itemEscolhido" :value="selectedItemName" />
           <VariableDisplay label="totalPronto" :value="totalPrepared" />
         </div>
       </div>
@@ -91,6 +95,7 @@ export default defineComponent({
       },
     ],
     selectedItem: "",
+    selectedItemName: "",
     total: 0,
     totalPrepared: 0,
   }),
@@ -101,12 +106,15 @@ export default defineComponent({
 
       if (this.selectedItem == "birthday_cake") {
         this.total = 1;
+        this.selectedItemName = "bolo"
         this.currentState = "conditional_cake";
       } else if (this.selectedItem == "balloon") {
         this.total = 10;
+        this.selectedItemName = "balão"
         this.currentState = "conditional_balloon";
       } else if (this.selectedItem == "party_candy") {
         this.total = 20;
+        this.selectedItemName = "doce"
         this.currentState = "conditional_candy";
       } else {
         console.error("No item selected");
@@ -122,6 +130,7 @@ export default defineComponent({
     restoreSim() {
       this.currentState = "initial";
       this.selectedItem = "";
+      this.selectedItemName = ""
       this.total = 0;
       this.totalPrepared = 0;
     }
@@ -132,8 +141,14 @@ export default defineComponent({
 <style>
 .sim-workspace {
   display: flex;
-  flex-direction: column;
+  width: 100%;
   height: 100%;
+}
+
+.conditional-loop-box {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .loop-counter {
@@ -141,8 +156,11 @@ export default defineComponent({
 }
 
 .variable-display {
-  align-self: flex-end;
-  margin-top: -27rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2rem;
+  margin-left: 2rem;
 }
 
 .indent-code {
