@@ -17,7 +17,7 @@
         <div class="variable-display">
           <VariableDisplay label="quantidade" :value="total" />
           <VariableDisplay label="itemEscolhido" :value="selectedItemName" />
-          <VariableDisplay label="totalPronto" :value="totalPrepared" />
+          <VariableDisplay v-if="selectedItem !== ''" label="totalPronto" :value="totalPrepared" />
         </div>
       </div>
     </template>
