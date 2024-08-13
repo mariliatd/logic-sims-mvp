@@ -2,7 +2,7 @@
   <v-dialog v-model="openOutputDialog" width="300px">
     <v-card :text="content">
       <v-card-actions>
-        <v-btn text="Fechar" @click="close"></v-btn>
+        <v-btn text="Começar" @click="close"></v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
