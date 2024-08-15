@@ -5,7 +5,8 @@
       <div class="sim-workspace">
         <div class="conditional-loop-box">
           <ConditionalControl
-            label="itemEscolhido"
+            itemLabel="itemEscolhido"
+            amountLabel="quantidade"
             :content="items"
             @selectedItem="selectItem"
             :selectedItem="selectedItem"

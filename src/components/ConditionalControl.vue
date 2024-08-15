@@ -1,7 +1,7 @@
 <template>
   <div class="control-box">
-    <p class="label-text">{{ label }}</p>
-    <div class="control">
+    <p class="label-text">{{ itemLabel }}</p>
+    <div class="item-control">
       <v-row>
         <v-col v-for="item in content" :key="item.name" :cols="item.size">
           <button
@@ -9,8 +9,16 @@
             :disabled="selectedItem !== '' && item.name !== selectedItem"
           >
             <img :src="item.path" :alt="item.text" width="80px" height="80px" />
-            <p class="item-label">{{ item.label }}</p>
           </button>
+        </v-col>
+      </v-row>
+    </div>
+
+    <p class="label-text">{{ amountLabel }}</p>
+    <div class="amount-control">
+      <v-row>
+        <v-col v-for="item in content" :key="item.name" :cols="item.size">
+          <p class="item-label">{{ item.label }}</p>
         </v-col>
       </v-row>
     </div>
@@ -23,7 +31,8 @@ import { defineComponent, type PropType } from "vue";
 
 export default defineComponent({
   props: {
-    label: { type: String, required: true },
+    itemLabel: { type: String, required: true },
+    amountLabel: { type: String, required: true },
     content: {
       type: Array as PropType<Array<ItemCard>>,
       require: true,
@@ -48,15 +57,26 @@ export default defineComponent({
 
 .label-text {
   text-align: center;
-  margin-bottom: 0.2rem;
 }
 
-.control {
+.item-control {
   border: solid 0.12rem #1d2d44;
   border-radius: 1rem;
   background-color: #e9e8e8;
   width: 360px;
-  height: 160px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  padding: 0 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.amount-control {
+  border: solid 0.12rem #1d2d44;
+  border-radius: 1rem;
+  background-color: #e9e8e8;
+  width: 360px;
+  height: 50px;
   display: flex;
   align-items: center;
   padding: 0 0.5rem;
