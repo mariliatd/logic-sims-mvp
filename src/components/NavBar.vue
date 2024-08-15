@@ -2,6 +2,7 @@
   <div class="nav-container">
     <span class="title">{{ simName }}</span>
     <nav>
+      <a class="nav-link" href="#">Atividade</a>
       <a class="nav-link" href="#">Ajuda</a>
     </nav>
   </div>
@@ -40,6 +41,6 @@ a {
 }
 
 .nav-link {
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1.5rem;
 }
 </style>

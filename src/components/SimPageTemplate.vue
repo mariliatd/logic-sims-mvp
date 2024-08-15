@@ -77,6 +77,7 @@ body {
 }
 
 .code-box {
+  font-size: 1.3rem;
   border: solid 0.12rem #1d2d44;
   border-radius: 1rem;
   margin: 1.2rem;

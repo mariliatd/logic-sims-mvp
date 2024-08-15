@@ -31,27 +31,28 @@
         <p :class="['pseudocode', isRunning('conditional_cake') ? 'running' : '']">
           <b>se</b> itemEscolhido = "bolo" <b>então</b> <br />
           <p class="pl-7">quantidade <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 1</p>
-          <p class="pl-7"><b>escreva</b>("Prepare 1 bolo!")</p>
+          <p class="pl-7"><b>escreva</b> ("Prepare 1 bolo!")</p>
         </p>
         <p :class="['pseudocode', isRunning('conditional_balloon') ? 'running' : '']">
           <b>senão</b> <br />
           <p class="pl-7"><b>se</b> itemEscolhido = "balão" <b>então</b> <br /></p>
           <p class="pl-14">quantidade <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 10</p>
-          <p class="pl-14"><b>escreva</b>("Prepare 10 balões!")</p>
+          <p class="pl-14"><b>escreva</b> ("Prepare 10 balões!")</p>
         </p>
         <p :class="['pseudocode', isRunning('conditional_candy') ? 'running' : '']">
           <p class="pl-7"><b>senão</b> <br /></p>
           <p class="pl-14">quantidade <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 20</p>
-          <p class="pl-14"><b>escreva</b>("Prepare 20 doces!")</p>
+          <p class="pl-14"><b>escreva</b> ("Prepare 20 doces!")</p>
         </p>
         <p :class="['pseudocode', isRunning('variable_totalPronto') ? 'running' : '']">
           totalPronto <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 0
         </p>
         <p :class="['pseudocode', isRunning('loop') ? 'running' : '']">
-          totalPronto <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 0
           <b>enquanto</b> totalPronto < quantidade <b>faça</b>
+          <p class="pl-7">prepare 1 itemEscolhido</p>
           <p class="pl-7"> totalPronto <v-icon icon="mdi-arrow-left" size="20px"></v-icon> totalPronto + 1</p>
         </p>
+        <p></p>
       </div>
     </template>
   </SimPageTemplate>
@@ -188,7 +189,7 @@ export default defineComponent({
 }
 
 .indent-code {
-  margin: 1.2rem;
+  margin: 1rem;
 }
 
 .pseudocode {
