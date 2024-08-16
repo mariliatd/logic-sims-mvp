@@ -4,10 +4,7 @@
     <div class="item-control">
       <v-row>
         <v-col v-for="item in content" :key="item.name" :cols="item.size">
-          <button
-            @click="selectItem(item)"
-            :disabled="selectedItem !== '' && item.name !== selectedItem"
-          >
+          <button @click="selectItem(item)" :disabled="isDisabled(item.name)">
             <img :src="item.path" :alt="item.text" width="80px" height="80px" />
           </button>
         </v-col>
@@ -39,10 +36,17 @@ export default defineComponent({
       default: () => [],
     },
     selectedItem: { type: String, required: true },
+    preparedItemList: { type: Array<String>, required: true },
   },
   methods: {
     selectItem(item: ItemCard) {
       this.$emit("selectedItem", item.name);
+    },
+    isDisabled(item: String) {
+      return (
+        (this.selectedItem !== "" && item !== this.selectedItem) ||
+        this.preparedItemList.includes(item)
+      );
     },
   },
 });

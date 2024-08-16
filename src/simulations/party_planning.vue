@@ -10,50 +10,68 @@
             :content="items"
             @selectedItem="selectItem"
             :selectedItem="selectedItem"
+            :preparedItemList="preparedItemsList"
           />
           <div v-if="selectedItem !== ''" class="loop-counter">
             <LoopCounter :selectedItem="selectedItem" :total="total" @totalPrepared="prepareItem" :totalPrepared="totalPrepared"/>
           </div>
         </div>
         <div class="variable-display">
-          <VariableDisplay label="quantidade" :value="total" />
+          <VariableDisplay label="itensProntos" :value="preparedItems" />
           <VariableDisplay label="itemEscolhido" :value="selectedItemName" />
-          <VariableDisplay v-if="selectedItem !== '' && !shouldShowDialog" label="totalPronto" :value="totalPrepared" />
+          <VariableDisplay label="quantidade" :value="total" />
+          <VariableDisplay v-if="selectedItem !== '' && !shouldShowConditionalDialog" label="totalPronto" :value="totalPrepared" />
         </div>
-        <OutputDialog @closeOutputDialog="closeDialog" :openOutputDialog="shouldShowDialog" :content="printMessage"/>
+        <OutputDialog @closeOutputDialog="closeConditionalDialog" buttonText="Começar" :openOutputDialog="shouldShowConditionalDialog" :content="printConditionalMessage"/>
+        <OutputDialog @closeOutputDialog="closeLoopDialog" buttonText="Fechar" :openOutputDialog="shouldShowLoopDialog" :content="printLoopMessage"/>
+        <OutputDialog @closeOutputDialog="closeEndSimDialog" buttonText="Fechar" :openOutputDialog="shouldShowEndSimDialog" :content="printEndSimMessage"/>
       </div>
     </template>
     <template #pseudocode>
       <div class="indent-code">
-        <p :class="['pseudocode', isRunning('variable_quantidade') ? 'running' : '']">
+        <p :class="['pseudocode', isRunning('variable_itensProntos') ? 'running' : '']">
+          itensProntos <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 0
+        </p>
+        <p :class="['pseudocode', isRunning('loop_1') ? 'running' : '']">
+          <b>enquanto</b> itensProntos < 3 <b>faça</b>
+        </p>
+        <p class="pl-10" :class="['pseudocode', isRunning('variable_quantidade') ? 'running' : '']">
           quantidade <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 0
         </p>
-        <p :class="['pseudocode', isRunning('read_item') ? 'running' : '']"><b>leia</b> (itemEscolhido)</p>
-        <p :class="['pseudocode', isRunning('conditional_cake') ? 'running' : '']">
+        <p class="pl-10" :class="['pseudocode', isRunning('read_item') ? 'running' : '']"><b>leia</b> (itemEscolhido)</p>
+        <p class="pl-10" :class="['pseudocode', isRunning('conditional_cake') ? 'running' : '']">
           <b>se</b> itemEscolhido = "bolo" <b>então</b> <br />
           <p class="pl-7">quantidade <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 1</p>
           <p class="pl-7"><b>escreva</b> ("Prepare 1 bolo!")</p>
         </p>
-        <p :class="['pseudocode', isRunning('conditional_balloon') ? 'running' : '']">
+        <p class="pl-10" :class="['pseudocode', isRunning('conditional_balloon') ? 'running' : '']">
           <b>senão</b> <br />
           <p class="pl-7"><b>se</b> itemEscolhido = "balão" <b>então</b> <br /></p>
           <p class="pl-14">quantidade <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 10</p>
           <p class="pl-14"><b>escreva</b> ("Prepare 10 balões!")</p>
         </p>
-        <p :class="['pseudocode', isRunning('conditional_candy') ? 'running' : '']">
+        <p class="pl-10" :class="['pseudocode', isRunning('conditional_candy') ? 'running' : '']">
           <p class="pl-7"><b>senão</b> <br /></p>
           <p class="pl-14">quantidade <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 20</p>
           <p class="pl-14"><b>escreva</b> ("Prepare 20 doces!")</p>
         </p>
-        <p :class="['pseudocode', isRunning('variable_totalPronto') ? 'running' : '']">
+        <p class="pl-10" :class="['pseudocode', isRunning('variable_totalPronto') ? 'running' : '']">
           totalPronto <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 0
         </p>
-        <p :class="['pseudocode', isRunning('loop') ? 'running' : '']">
+        <p class="pl-10" :class="['pseudocode', isRunning('loop_2') ? 'running' : '']">
           <b>enquanto</b> totalPronto < quantidade <b>faça</b>
           <p class="pl-7">prepare 1 itemEscolhido</p>
           <p class="pl-7"> totalPronto <v-icon icon="mdi-arrow-left" size="20px"></v-icon> totalPronto + 1</p>
         </p>
-        <p></p>
+        <p class="pl-10" :class="['pseudocode', isRunning('increment_itensProntos') ? 'running' : '']">
+          <p>itensProntos <v-icon icon="mdi-arrow-left" size="20px"></v-icon> itensProntos + 1</p>
+        </p>
+        <p class="pl-10" :class="['pseudocode', isRunning('write_itemPronto') ? 'running' : '']">
+          <b>escreva</b> ("O itemEscolhido está pronto!")
+        </p>
+        <p :class="['pseudocode', isRunning('end_sim') ? 'running' : '']">
+          <b>escreva</b> ("A festa está pronta!!!")
+        </p>
       </div>
     </template>
   </SimPageTemplate>
@@ -107,8 +125,14 @@ export default defineComponent({
     selectedItemName: "",
     total: 0,
     totalPrepared: 0,
-    printMessage: "",
-    shouldShowDialog: false,
+    printConditionalMessage: "",
+    printLoopMessage: "",
+    printEndSimMessage: "",
+    shouldShowConditionalDialog: false,
+    shouldShowLoopDialog: false,
+    shouldShowEndSimDialog: false,
+    preparedItems: 0,
+    preparedItemsList: [] as String[],
   }),
   methods: {
     selectItem(value: string) {
@@ -119,47 +143,89 @@ export default defineComponent({
         this.total = 1;
         this.selectedItemName = "bolo"
         this.currentState = "conditional_cake";
-        this.printMessage = "Prepare 1 bolo!";
+        this.printConditionalMessage = "Prepare 1 bolo!";
       } else if (this.selectedItem == "balloon") {
         this.total = 10;
         this.selectedItemName = "balão"
         this.currentState = "conditional_balloon";
-        this.printMessage = "Prepare 10 balões!";
+        this.printConditionalMessage = "Prepare 10 balões!";
       } else if (this.selectedItem == "party_candy") {
         this.total = 20;
         this.selectedItemName = "doce"
         this.currentState = "conditional_candy";
-        this.printMessage = "Prepare 20 doces!";
+        this.printConditionalMessage = "Prepare 20 doces!";
       } else {
         console.error("No item selected");
       }
 
-      this.shouldShowDialog = true;
+      this.shouldShowConditionalDialog = true;
     },
-    closeDialog(value: boolean) {
-      this.shouldShowDialog = value;
+    closeConditionalDialog(value: boolean) {
+      this.shouldShowConditionalDialog = value;
       this.currentState = "variable_totalPronto";
-      setTimeout(() => this.currentState = "loop", 500);
+      setTimeout(() => this.currentState = "loop_2", 500);
+    },
+    closeLoopDialog(value: boolean) {
+      this.shouldShowLoopDialog = value;
+
+      if (this.preparedItems === 3) {
+        this.printEndSimMessage = "A festa está pronta!!!";
+        setTimeout(() => this.currentState = "end_sim", 500);
+        setTimeout(() => this.shouldShowEndSimDialog = true, 500);
+      } else {
+        this.restartLoop();
+      }
+    },
+    closeEndSimDialog(value: boolean) {
+      this.shouldShowEndSimDialog = value;
+      this.restoreSim();
     },
     prepareItem(value: number) {
       console.log('total prepared', value);
       this.totalPrepared = value;
+
+      if (this.totalPrepared === this.total) {
+        this.currentState = "increment_itensProntos";
+        this.preparedItems++;
+        this.preparedItemsList.push(this.selectedItem);
+        this.printLoopMessage = "O itemEscolhido está pronto!";
+
+        setTimeout(() => this.currentState = "write_itemPronto", 500);
+        setTimeout(() => this.shouldShowLoopDialog = true, 500);
+      }
     },
     isRunning(codeState: string) {
       return codeState == this.currentState;
     },
-    restoreSim() {
-      this.currentState = "variable_quantidade";
-      setTimeout(() => this.currentState = "read_item", 500);
+    restartLoop() {
+      this.currentState = "loop_1";
+      setTimeout(() => this.currentState = "variable_quantidade", 500);
+      setTimeout(() => this.currentState = "read_item", 1000);
+
       this.selectedItem = "";
       this.selectedItemName = ""
       this.total = 0;
       this.totalPrepared = 0;
+    },
+    restoreSim() {
+      this.currentState = "variable_itensProntos";
+      setTimeout(() => this.currentState = "loop_1", 500);
+      setTimeout(() => this.currentState = "variable_quantidade", 1000);
+      setTimeout(() => this.currentState = "read_item", 1500);
+
+      this.selectedItem = "";
+      this.selectedItemName = ""
+      this.total = 0;
+      this.totalPrepared = 0;
+      this.preparedItems = 0;
+      this.preparedItemsList = [];
     }
   },
   mounted() {
-    this.currentState = "variable_quantidade";
-    setTimeout(() => this.currentState = "read_item", 500);
+    this.currentState = "variable_itensProntos";
+    setTimeout(() => this.currentState = "loop_1", 500);
+    setTimeout(() => this.currentState = "variable_quantidade", 1000);
+    setTimeout(() => this.currentState = "read_item", 1500);
   },
 });
 </script>
@@ -184,17 +250,17 @@ export default defineComponent({
 .variable-display {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
   margin-top: 2rem;
   margin-left: 2rem;
 }
 
 .indent-code {
-  margin: 1rem;
+  margin: 0.5rem;
 }
 
 .pseudocode {
-  padding: 0.2rem 1rem;
+  padding: 0.1rem 1rem;
 }
 
 .running {

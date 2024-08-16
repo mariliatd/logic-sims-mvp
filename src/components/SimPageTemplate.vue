@@ -40,18 +40,6 @@ export default defineComponent({
 </script>
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html,
-body {
-  height: 100%;
-  overflow: hidden;
-}
-
 .template-box {
   position: absolute;
   top: 4.7rem;
@@ -77,7 +65,7 @@ body {
 }
 
 .code-box {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   border: solid 0.12rem #1d2d44;
   border-radius: 1rem;
   margin: 1.2rem;
@@ -85,11 +73,11 @@ body {
 }
 
 .sub-title {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   text-align: center;
   background-color: #eccbdf;
   border-radius: 1rem;
-  padding: 0.5rem;
-  margin: 1rem;
+  padding: 0.2rem;
+  margin: 0.6rem;
 }
 </style>

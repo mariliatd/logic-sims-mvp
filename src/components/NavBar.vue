@@ -26,6 +26,10 @@ a {
   color: inherit;
 }
 
+nav {
+  margin-right: 0.5rem;
+}
+
 .title {
   font-family: "Fuzzy Bubbles", sans-serif;
   font-size: 2rem;
@@ -41,6 +45,6 @@ a {
 }
 
 .nav-link {
-  padding: 0.5rem 1.5rem;
+  padding: 0.5rem 1rem;
 }
 </style>
