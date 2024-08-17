@@ -5,8 +5,4 @@
   </p>
 </template>
 
-<style>
-.loop-color {
-  color: red;
-}
-</style>
+<style></style>
