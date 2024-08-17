@@ -17,10 +17,10 @@
           </div>
         </div>
         <div class="variable-display">
-          <VariableDisplay label="itensProntos" :value="preparedItems" />
-          <VariableDisplay label="itemEscolhido" :value="selectedItemName" />
-          <VariableDisplay label="quantidade" :value="total" />
-          <VariableDisplay v-if="selectedItem !== '' && !shouldShowConditionalDialog" label="totalPronto" :value="totalPrepared" />
+          <VariableDisplay name="itensProntos" :value="preparedItems" />
+          <VariableDisplay name="itemEscolhido" :value="selectedItemName" />
+          <VariableDisplay name="quantidade" :value="total" />
+          <VariableDisplay v-if="selectedItem !== '' && !shouldShowConditionalDialog" name="totalPronto" :value="totalPrepared" />
         </div>
         <OutputDialog @closeOutputDialog="closeConditionalDialog" buttonText="Começar" :openOutputDialog="shouldShowConditionalDialog" :content="printConditionalMessage"/>
         <OutputDialog @closeOutputDialog="closeLoopDialog" buttonText="Fechar" :openOutputDialog="shouldShowLoopDialog" :content="printLoopMessage"/>
@@ -29,43 +29,35 @@
     </template>
     <template #pseudocode>
       <div class="indent-code">
-        <p :class="['pseudocode', isRunning('variable_itensProntos') ? 'running' : '']">
-          itensProntos <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 0
-        </p>
+        <Variable name="itensProntos" value="0" :isAssignment="true" :class="['pseudocode', isRunning('variable_itensProntos') ? 'running' : '']" />
         <p :class="['pseudocode', isRunning('loop_1') ? 'running' : '']">
-          <b>enquanto</b> itensProntos < 3 <b>faça</b>
+          <b>enquanto</b> <Variable name="itensProntos" /> < 3 <b>faça</b>
         </p>
-        <p class="pl-10" :class="['pseudocode', isRunning('variable_quantidade') ? 'running' : '']">
-          quantidade <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 0
-        </p>
-        <p class="pl-10" :class="['pseudocode', isRunning('read_item') ? 'running' : '']"><b>leia</b> (itemEscolhido)</p>
+        <Variable name="quantidade" value="0" :isAssignment="true" class="pl-10" :class="['pseudocode', isRunning('variable_quantidade') ? 'running' : '']" />
+        <p class="pl-10" :class="['pseudocode', isRunning('read_item') ? 'running' : '']"><b>leia</b> (<Variable name="itemEscolhido" />)</p>
         <p class="pl-10" :class="['pseudocode', isRunning('conditional_cake') ? 'running' : '']">
-          <b>se</b> itemEscolhido = "bolo" <b>então</b> <br />
-          <p class="pl-7">quantidade <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 1</p>
+          <b>se</b> <Variable name="itemEscolhido" /> = "bolo" <b>então</b> <br />
+          <Variable name="quantidade" value="1" :isAssignment="true" class="pl-7" />
           <p class="pl-7"><b>escreva</b> ("Prepare 1 bolo!")</p>
         </p>
         <p class="pl-10" :class="['pseudocode', isRunning('conditional_balloon') ? 'running' : '']">
           <b>senão</b> <br />
-          <p class="pl-7"><b>se</b> itemEscolhido = "balão" <b>então</b> <br /></p>
-          <p class="pl-14">quantidade <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 10</p>
+          <p class="pl-7"><b>se</b> <Variable name="itemEscolhido" /> = "balão" <b>então</b> <br /></p>
+          <Variable name="quantidade" value="10" :isAssignment="true" class="pl-14" />
           <p class="pl-14"><b>escreva</b> ("Prepare 10 balões!")</p>
         </p>
         <p class="pl-10" :class="['pseudocode', isRunning('conditional_candy') ? 'running' : '']">
           <p class="pl-7"><b>senão</b> <br /></p>
-          <p class="pl-14">quantidade <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 20</p>
+          <Variable name="quantidade" value="20" :isAssignment="true" class="pl-14" />
           <p class="pl-14"><b>escreva</b> ("Prepare 20 doces!")</p>
         </p>
-        <p class="pl-10" :class="['pseudocode', isRunning('variable_totalPronto') ? 'running' : '']">
-          totalPronto <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 0
-        </p>
+        <Variable name="totalPronto" value="0" :isAssignment="true" class="pl-10" :class="['pseudocode', isRunning('variable_totalPronto') ? 'running' : '']" />
         <p class="pl-10" :class="['pseudocode', isRunning('loop_2') ? 'running' : '']">
-          <b>enquanto</b> totalPronto < quantidade <b>faça</b>
-          <p class="pl-7">prepare 1 itemEscolhido</p>
-          <p class="pl-7"> totalPronto <v-icon icon="mdi-arrow-left" size="20px"></v-icon> totalPronto + 1</p>
+          <b>enquanto</b> <Variable name="totalPronto" /> < <Variable name="quantidade" /> <b>faça</b>
+          <p class="pl-7">prepare 1 <Variable name="itemEscolhido" /></p>
+          <Variable name="totalPronto" value="totalPronto + 1" :isAssignment="true" class="pl-7" />
         </p>
-        <p class="pl-10" :class="['pseudocode', isRunning('increment_itensProntos') ? 'running' : '']">
-          <p>itensProntos <v-icon icon="mdi-arrow-left" size="20px"></v-icon> itensProntos + 1</p>
-        </p>
+        <Variable name="itensProntos" value="itensProntos + 1" :isAssignment="true" class="pl-10" :class="['pseudocode', isRunning('increment_itensProntos') ? 'running' : '']" />
         <p class="pl-10" :class="['pseudocode', isRunning('write_itemPronto') ? 'running' : '']">
           <b>escreva</b> ("O itemEscolhido está pronto!")
         </p>
@@ -80,12 +72,13 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
-import ConditionalControl from "../components/ConditionalControl.vue";
-import NavBar from "../components/NavBar.vue";
-import SimPageTemplate from "../components/SimPageTemplate.vue";
-import LoopCounter from "@/components/LoopCounter.vue";
-import VariableDisplay from "@/components/VariableDisplay.vue";
-import OutputDialog from "@/components/OutputDialog.vue";
+import ConditionalControl from "@/components/simulation/ConditionalControl.vue";
+import NavBar from "@/components/simulation/NavBar.vue";
+import SimPageTemplate from "@/components/simulation/SimPageTemplate.vue";
+import LoopCounter from "@/components/simulation/LoopCounter.vue";
+import VariableDisplay from "@/components/simulation/VariableDisplay.vue";
+import OutputDialog from "@/components/simulation/OutputDialog.vue";
+import Variable from "@/components/pseudocode/Variable.vue";
 
 export default defineComponent({
   components: {
@@ -95,6 +88,7 @@ export default defineComponent({
     OutputDialog,
     SimPageTemplate,
     VariableDisplay,
+    Variable
   },
   data: () => ({
     currentState: "",

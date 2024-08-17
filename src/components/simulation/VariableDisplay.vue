@@ -1,7 +1,7 @@
 <template>
-  <div class="variable-box">
-    <p class="label-text">{{ label }}</p>
-    <div class="variable">
+  <div class="variable">
+    <p class="name">{{ name }}</p>
+    <div class="value">
       <span :class="[isString(value) ? 'text' : 'number']">{{ value }}</span>
     </div>
   </div>
@@ -12,7 +12,7 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   props: {
-    label: { type: String, required: true },
+    name: { type: String, required: true },
     value: { type: [Number, String], required: true },
   },
   methods: {
@@ -24,18 +24,18 @@ export default defineComponent({
 </script>
 
 <style>
-.variable-box {
+.variable {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.label-text {
+.name {
   text-align: center;
   margin-bottom: 0.2rem;
 }
 
-.variable {
+.value {
   border: solid 0.12rem #1d2d44;
   border-radius: 1rem;
   background-color: #e9e8e8;

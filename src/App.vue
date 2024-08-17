@@ -11,7 +11,7 @@ import PartyPlanning from "./simulations/party_planning.vue";
 
 body {
   font-family: "Roboto", sans-serif;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   color: #1d2d44;
 }
 </style>

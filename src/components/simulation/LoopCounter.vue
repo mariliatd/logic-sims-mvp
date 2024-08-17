@@ -1,7 +1,7 @@
 <template>
   <div v-if="selectedItem == 'birthday_cake'" id="bake-cake">
     <img
-      src="../assets/bake.svg"
+      src="@/assets/bake.svg"
       alt="fogão"
       width="200px"
       height="200px"
@@ -10,7 +10,7 @@
     />
     <div v-for="index in totalPrepared" :key="index" id="cake-prepared">
       <img
-        src="../assets/birthday-cake.svg"
+        src="@/assets/birthday-cake.svg"
         alt="bolo de aniversário"
         width="100px"
         height="100px"
@@ -20,7 +20,7 @@
   <div v-if="selectedItem == 'balloon'">
     <div>
       <img
-        src="../assets/gas-cylinder.svg"
+        src="@/assets/gas-cylinder.svg"
         alt="cilindro de gás"
         width="200px"
         height="200px"
@@ -31,7 +31,7 @@
     <div id="balloon-box">
       <div v-for="index in totalPrepared" :key="index" id="balloon-prepared">
         <img
-          src="../assets/balloon.svg"
+          src="@/assets/balloon.svg"
           alt="balão"
           width="100px"
           height="100px"
@@ -42,7 +42,7 @@
   <div v-if="selectedItem == 'party_candy'" id="plate-candy-box">
     <div>
       <img
-        src="../assets/plate.svg"
+        src="@/assets/plate.svg"
         alt="prato"
         width="250px"
         height="200px"
@@ -50,7 +50,7 @@
         class="counter-increment"
       />
       <img
-        src="../assets/plate.svg"
+        src="@/assets/plate.svg"
         alt="prato"
         width="250px"
         height="200px"
@@ -62,7 +62,7 @@
     <div id="candy-box">
       <div v-for="index in totalPrepared" :key="index" id="candy-prepared">
         <img
-          src="../assets/party-candy.svg"
+          src="@/assets/party-candy.svg"
           alt="doce de festa"
           width="50px"
           height="50px"
