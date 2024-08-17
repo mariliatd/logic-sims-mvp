@@ -39,14 +39,20 @@
           </template>
         </Loop>
         <Variable name="quantidade" value="0" :isAssignment="true" class="pl-10" :class="['pseudocode', isRunning('variable_quantidade') ? 'running' : '']" />
-        <p class="pl-10" :class="['pseudocode', isRunning('read_item') ? 'running' : '']"><b>leia</b> (<Variable name="itemEscolhido" />)</p>
+        <Input class="pl-10" :class="['pseudocode', isRunning('read_item') ? 'running' : '']">
+          <template #content>
+            <Variable name="itemEscolhido" />
+          </template>
+        </Input>
         <p class="pl-10" :class="['pseudocode', isRunning('conditional_cake') ? 'running' : '']">
           <b>se</b> <Operator operator="=">
             <template #leftExpression><Variable name="itemEscolhido" /></template>
             <template #rightExpression>"bolo"</template>
           </Operator> <b>então</b>
           <Variable name="quantidade" value="1" :isAssignment="true" class="pl-7" />
-          <p class="pl-7"><b>escreva</b> ("Prepare 1 bolo!")</p>
+          <Output class="pl-7">
+            <template #content>"Prepare 1 bolo!"</template>
+          </Output>
         </p>
         <p class="pl-10" :class="['pseudocode', isRunning('conditional_balloon') ? 'running' : '']">
           <b>senão</b>
@@ -55,12 +61,16 @@
             <template #rightExpression>"balão"</template>
           </Operator> <b>então</b></p>
           <Variable name="quantidade" value="10" :isAssignment="true" class="pl-14" />
-          <p class="pl-14"><b>escreva</b> ("Prepare 10 balões!")</p>
+          <Output class="pl-14">
+            <template #content>"Prepare 10 balões!"</template>
+          </Output>
         </p>
         <p class="pl-10" :class="['pseudocode', isRunning('conditional_candy') ? 'running' : '']">
           <p class="pl-7"><b>senão</b> <br /></p>
           <Variable name="quantidade" value="20" :isAssignment="true" class="pl-14" />
-          <p class="pl-14"><b>escreva</b> ("Prepare 20 doces!")</p>
+          <Output class="pl-14">
+            <template #content>"Prepare 20 doces!"</template>
+          </Output>
         </p>
         <Variable name="totalPronto" value="0" :isAssignment="true" class="pl-10" :class="['pseudocode', isRunning('variable_totalPronto') ? 'running' : '']" />
         <Loop class="pl-10" :class="['pseudocode', isRunning('loop_2') ? 'running' : '']">
@@ -76,12 +86,12 @@
           </template>
         </Loop>
         <Variable name="itensProntos" value="itensProntos + 1" :isAssignment="true" class="pl-10" :class="['pseudocode', isRunning('increment_itensProntos') ? 'running' : '']" />
-        <p class="pl-10" :class="['pseudocode', isRunning('write_itemPronto') ? 'running' : '']">
-          <b>escreva</b> ("O itemEscolhido está pronto!")
-        </p>
-        <p :class="['pseudocode', isRunning('end_sim') ? 'running' : '']">
-          <b>escreva</b> ("A festa está pronta!!!")
-        </p>
+        <Output class="pl-10" :class="['pseudocode', isRunning('write_itemPronto') ? 'running' : '']">
+          <template #content>"O itemEscolhido está pronto!"</template>
+        </Output>
+        <Output :class="['pseudocode', isRunning('end_sim') ? 'running' : '']">
+          <template #content>"A festa está pronta!!!"</template>
+        </Output>
       </div>
     </template>
   </SimPageTemplate>
@@ -99,6 +109,8 @@ import OutputDialog from "@/components/simulation/OutputDialog.vue";
 import Variable from "@/components/pseudocode/Variable.vue";
 import Operator from "@/components/pseudocode/Operator.vue";
 import Loop from "@/components/pseudocode/Loop.vue";
+import Input from "@/components/pseudocode/Input.vue";
+import Output from "@/components/pseudocode/Output.vue";
 
 export default defineComponent({
   components: {
@@ -111,6 +123,8 @@ export default defineComponent({
     Variable,
     Operator,
     Loop,
+    Input,
+    Output,
   },
   data: () => ({
     currentState: "",
