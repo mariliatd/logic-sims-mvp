@@ -13,7 +13,7 @@
             :preparedItemList="preparedItemsList"
           />
           <div v-if="selectedItem !== ''" class="loop-counter">
-            <LoopCounter :selectedItem="selectedItem" :total="total" @totalPrepared="prepareItem" :totalPrepared="totalPrepared"/>
+            <LoopControl :selectedItem="selectedItem" :total="total" @totalPrepared="prepareItem" :totalPrepared="totalPrepared"/>
           </div>
         </div>
         <div class="variable-display">
@@ -30,12 +30,14 @@
     <template #pseudocode>
       <div class="indent-code">
         <Variable name="itensProntos" value="0" :isAssignment="true" :class="['pseudocode', isRunning('variable_itensProntos') ? 'running' : '']" />
-        <p :class="['pseudocode', isRunning('loop_1') ? 'running' : '']">
-          <b>enquanto</b> <Operator operator="<">
-            <template #leftExpression><Variable name="itensProntos" /></template>
-            <template #rightExpression>3</template>
-          </Operator> <b>faça</b>
-        </p>
+        <Loop :class="['pseudocode', isRunning('loop_1') ? 'running' : '']">
+          <template #condition>
+            <Operator operator="<">
+              <template #leftExpression><Variable name="itensProntos" /></template>
+              <template #rightExpression>3</template>
+            </Operator>
+          </template>
+        </Loop>
         <Variable name="quantidade" value="0" :isAssignment="true" class="pl-10" :class="['pseudocode', isRunning('variable_quantidade') ? 'running' : '']" />
         <p class="pl-10" :class="['pseudocode', isRunning('read_item') ? 'running' : '']"><b>leia</b> (<Variable name="itemEscolhido" />)</p>
         <p class="pl-10" :class="['pseudocode', isRunning('conditional_cake') ? 'running' : '']">
@@ -61,14 +63,18 @@
           <p class="pl-14"><b>escreva</b> ("Prepare 20 doces!")</p>
         </p>
         <Variable name="totalPronto" value="0" :isAssignment="true" class="pl-10" :class="['pseudocode', isRunning('variable_totalPronto') ? 'running' : '']" />
-        <p class="pl-10" :class="['pseudocode', isRunning('loop_2') ? 'running' : '']">
-          <b>enquanto</b> <Operator operator="<">
-            <template #leftExpression><Variable name="totalPronto" /></template>
-            <template #rightExpression><Variable name="quantidade" /></template>
-          </Operator> <b>faça</b>
-          <p class="pl-7">prepare 1 <Variable name="itemEscolhido" /></p>
-          <Variable name="totalPronto" value="totalPronto + 1" :isAssignment="true" class="pl-7" />
-        </p>
+        <Loop class="pl-10" :class="['pseudocode', isRunning('loop_2') ? 'running' : '']">
+          <template #condition>
+            <Operator operator="<">
+              <template #leftExpression><Variable name="totalPronto" /></template>
+              <template #rightExpression><Variable name="quantidade" /></template>
+            </Operator>
+          </template>
+          <template #instructions>
+            <p class="pl-7">prepare 1 <Variable name="itemEscolhido" /></p>
+            <Variable name="totalPronto" value="totalPronto + 1" :isAssignment="true" class="pl-7" />
+          </template>
+        </Loop>
         <Variable name="itensProntos" value="itensProntos + 1" :isAssignment="true" class="pl-10" :class="['pseudocode', isRunning('increment_itensProntos') ? 'running' : '']" />
         <p class="pl-10" :class="['pseudocode', isRunning('write_itemPronto') ? 'running' : '']">
           <b>escreva</b> ("O itemEscolhido está pronto!")
@@ -87,22 +93,24 @@ import { defineComponent } from "vue";
 import ConditionalControl from "@/components/simulation/ConditionalControl.vue";
 import NavBar from "@/components/NavBar.vue";
 import SimPageTemplate from "@/components/SimPageTemplate.vue";
-import LoopCounter from "@/components/simulation/LoopCounter.vue";
+import LoopControl from "@/components/simulation/LoopControl.vue";
 import VariableDisplay from "@/components/simulation/VariableDisplay.vue";
 import OutputDialog from "@/components/simulation/OutputDialog.vue";
 import Variable from "@/components/pseudocode/Variable.vue";
 import Operator from "@/components/pseudocode/Operator.vue";
+import Loop from "@/components/pseudocode/Loop.vue";
 
 export default defineComponent({
   components: {
     ConditionalControl,
-    LoopCounter,
+    LoopControl,
     NavBar,
     OutputDialog,
     SimPageTemplate,
     VariableDisplay,
     Variable,
     Operator,
+    Loop,
   },
   data: () => ({
     currentState: "",
