@@ -2,7 +2,7 @@
   <div class="nav-container">
     <span class="title">{{ simName }}</span>
     <nav>
-      <a class="nav-link" href="#">Atividade</a>
+      <a class="nav-link" href="#">Sobre a Simulação</a>
       <a class="nav-link" href="#">Ajuda</a>
     </nav>
   </div>
@@ -46,5 +46,10 @@ nav {
 
 .nav-link {
   padding: 0.5rem 1rem;
+}
+
+.nav-link:hover {
+  background-color: #69b7da;
+  border-radius: 1rem;
 }
 </style>

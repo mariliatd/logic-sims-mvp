@@ -59,10 +59,19 @@
           :isAssignment="true"
           :class="[
             'pseudocode',
-            isRunning('variable_itensProntos') ? 'running' : '',
+            'next-state',
+            isRunning('initial') ? 'running' : '',
           ]"
+          @click="currentState = 'loop_1'"
         />
-        <Loop :class="['pseudocode', isRunning('loop_1') ? 'running' : '']">
+        <Loop
+          :class="[
+            'pseudocode',
+            'next-state',
+            isRunning('loop_1') ? 'running' : '',
+          ]"
+          @click="currentState = 'variable_quantidade'"
+        >
           <template #condition>
             <Operator operator="<">
               <template #leftExpression
@@ -79,8 +88,10 @@
           class="pl-10"
           :class="[
             'pseudocode',
+            'next-state',
             isRunning('variable_quantidade') ? 'running' : '',
           ]"
+          @click="currentState = 'read_item'"
         />
         <Input
           class="pl-10"
@@ -175,8 +186,10 @@
           class="pl-10"
           :class="[
             'pseudocode',
+            'next-state',
             isRunning('variable_totalPronto') ? 'running' : '',
           ]"
+          @click="currentState = 'loop_2'"
         />
         <Loop
           class="pl-10"
@@ -193,7 +206,7 @@
             </Operator>
           </template>
           <template #instructions>
-            <p class="pl-7">prepare 1 <Variable name="itemEscolhido" /></p>
+            <p class="pl-7">prepare 1 <Variable name="{itemEscolhido}" /></p>
             <Variable
               name="totalPronto"
               value="totalPronto + 1"
@@ -209,8 +222,10 @@
           class="pl-10"
           :class="[
             'pseudocode',
+            'next-state',
             isRunning('increment_itensProntos') ? 'running' : '',
           ]"
+          @click="openLoopDialog()"
         />
         <Output
           class="pl-10"
@@ -219,7 +234,7 @@
             isRunning('write_itemPronto') ? 'running' : '',
           ]"
         >
-          <template #content>"O itemEscolhido está pronto!"</template>
+          <template #content>"O item {itemEscolhido} está pronto!"</template>
         </Output>
         <Output :class="['pseudocode', isRunning('end_sim') ? 'running' : '']">
           <template #content>"A festa está pronta!!!"</template>
@@ -263,7 +278,7 @@ export default defineComponent({
     Else,
   },
   data: () => ({
-    currentState: "",
+    currentState: "initial",
     items: [
       {
         name: "birthday_cake",
@@ -329,7 +344,10 @@ export default defineComponent({
     closeConditionalDialog(value: boolean) {
       this.shouldShowConditionalDialog = value;
       this.currentState = "variable_totalPronto";
-      setTimeout(() => (this.currentState = "loop_2"), 500);
+    },
+    openLoopDialog() {
+      this.currentState = "write_itemPronto";
+      this.shouldShowLoopDialog = true;
     },
     closeLoopDialog(value: boolean) {
       this.shouldShowLoopDialog = value;
@@ -350,14 +368,15 @@ export default defineComponent({
       console.log("total prepared", value);
       this.totalPrepared = value;
 
+      if (this.preparedItemsList.includes(this.selectedItem)) {
+        return;
+      }
+
       if (this.totalPrepared === this.total) {
         this.currentState = "increment_itensProntos";
         this.preparedItems++;
         this.preparedItemsList.push(this.selectedItem);
-        this.printLoopMessage = "O itemEscolhido está pronto!";
-
-        setTimeout(() => (this.currentState = "write_itemPronto"), 500);
-        setTimeout(() => (this.shouldShowLoopDialog = true), 500);
+        this.printLoopMessage = `O item ${this.selectedItemName} está pronto!`;
       }
     },
     isRunning(codeState: string) {
@@ -365,20 +384,13 @@ export default defineComponent({
     },
     restartLoop() {
       this.currentState = "loop_1";
-      setTimeout(() => (this.currentState = "variable_quantidade"), 500);
-      setTimeout(() => (this.currentState = "read_item"), 1000);
-
       this.selectedItem = "";
       this.selectedItemName = "";
       this.total = 0;
       this.totalPrepared = 0;
     },
     restoreSim() {
-      this.currentState = "variable_itensProntos";
-      setTimeout(() => (this.currentState = "loop_1"), 500);
-      setTimeout(() => (this.currentState = "variable_quantidade"), 1000);
-      setTimeout(() => (this.currentState = "read_item"), 1500);
-
+      this.currentState = "initial";
       this.selectedItem = "";
       this.selectedItemName = "";
       this.total = 0;
@@ -386,12 +398,6 @@ export default defineComponent({
       this.preparedItems = 0;
       this.preparedItemsList = [];
     },
-  },
-  mounted() {
-    this.currentState = "variable_itensProntos";
-    setTimeout(() => (this.currentState = "loop_1"), 500);
-    setTimeout(() => (this.currentState = "variable_quantidade"), 1000);
-    setTimeout(() => (this.currentState = "read_item"), 1500);
   },
 });
 </script>
@@ -427,6 +433,10 @@ export default defineComponent({
 
 .pseudocode {
   padding: 0.1rem 1rem;
+}
+
+.next-state {
+  cursor: pointer;
 }
 
 .running {
