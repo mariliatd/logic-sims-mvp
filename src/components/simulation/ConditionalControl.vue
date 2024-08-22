@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts">
-import type { ItemCard } from "@/types";
+import type { ItemCard } from "@/types.ts";
 import { defineComponent, type PropType } from "vue";
 
 export default defineComponent({

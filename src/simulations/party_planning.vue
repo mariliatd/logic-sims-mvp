@@ -5,6 +5,7 @@
       <div class="sim-workspace">
         <div class="conditional-loop-box">
           <ConditionalControl
+            v-if="currentState > PartyPlanningSimState.VariableQuantidade"
             itemLabel="itemEscolhido"
             amountLabel="quantidade"
             :content="items"
@@ -12,7 +13,10 @@
             :selectedItem="selectedItem"
             :preparedItemList="preparedItemsList"
           />
-          <div v-if="selectedItem !== ''" class="loop-counter">
+          <div
+            v-if="currentState >= PartyPlanningSimState.Loop2"
+            class="loop-counter"
+          >
             <LoopControl
               :selectedItem="selectedItem"
               :total="total"
@@ -23,8 +27,16 @@
         </div>
         <div class="variable-display">
           <VariableDisplay name="itensProntos" :value="preparedItems" />
-          <VariableDisplay name="itemEscolhido" :value="selectedItemName" />
-          <VariableDisplay name="quantidade" :value="total" />
+          <VariableDisplay
+            v-if="currentState > PartyPlanningSimState.Loop1"
+            name="quantidade"
+            :value="total"
+          />
+          <VariableDisplay
+            v-if="currentState > PartyPlanningSimState.VariableQuantidade"
+            name="itemEscolhido"
+            :value="selectedItemName"
+          />
           <VariableDisplay
             v-if="selectedItem !== '' && !shouldShowConditionalDialog"
             name="totalPronto"
@@ -59,18 +71,28 @@
           :isAssignment="true"
           :class="[
             'pseudocode',
-            'next-state',
-            isRunning('initial') ? 'running' : '',
+            isRunning(PartyPlanningSimState.Initial)
+              ? ['running', 'next-state']
+              : '',
           ]"
-          @click="currentState = 'loop_1'"
+          @click="
+            currentState === PartyPlanningSimState.Initial
+              ? (currentState = PartyPlanningSimState.Loop1)
+              : null
+          "
         />
         <Loop
           :class="[
             'pseudocode',
-            'next-state',
-            isRunning('loop_1') ? 'running' : '',
+            isRunning(PartyPlanningSimState.Loop1)
+              ? ['running', 'next-state']
+              : '',
           ]"
-          @click="currentState = 'variable_quantidade'"
+          @click="
+            currentState === PartyPlanningSimState.Loop1
+              ? (currentState = PartyPlanningSimState.VariableQuantidade)
+              : null
+          "
         >
           <template #condition>
             <Operator operator="<">
@@ -88,14 +110,22 @@
           class="pl-10"
           :class="[
             'pseudocode',
-            'next-state',
-            isRunning('variable_quantidade') ? 'running' : '',
+            isRunning(PartyPlanningSimState.VariableQuantidade)
+              ? ['running', 'next-state']
+              : '',
           ]"
-          @click="currentState = 'read_item'"
+          @click="
+            currentState === PartyPlanningSimState.VariableQuantidade
+              ? (currentState = PartyPlanningSimState.ReadItem)
+              : null
+          "
         />
         <Input
           class="pl-10"
-          :class="['pseudocode', isRunning('read_item') ? 'running' : '']"
+          :class="[
+            'pseudocode',
+            isRunning(PartyPlanningSimState.ReadItem) ? 'running' : '',
+          ]"
         >
           <template #content>
             <Variable name="itemEscolhido" />
@@ -105,7 +135,7 @@
           class="pl-10"
           :class="[
             'pseudocode',
-            isRunning('conditional_cake') ? 'running' : '',
+            isRunning(PartyPlanningSimState.ConditionalCake) ? 'running' : '',
           ]"
         >
           <template #condition>
@@ -132,7 +162,9 @@
           <Else
             :class="[
               'pseudocode',
-              isRunning('conditional_balloon') ? 'running' : '',
+              isRunning(PartyPlanningSimState.ConditionalBalloon)
+                ? 'running'
+                : '',
             ]"
           >
             <template #instructions>
@@ -163,7 +195,9 @@
             class="pl-11"
             :class="[
               'pseudocode',
-              isRunning('conditional_candy') ? 'running' : '',
+              isRunning(PartyPlanningSimState.ConditionalCandy)
+                ? 'running'
+                : '',
             ]"
           >
             <template #instructions>
@@ -186,14 +220,22 @@
           class="pl-10"
           :class="[
             'pseudocode',
-            'next-state',
-            isRunning('variable_totalPronto') ? 'running' : '',
+            isRunning(PartyPlanningSimState.VariableTotalPronto)
+              ? ['running', 'next-state']
+              : '',
           ]"
-          @click="currentState = 'loop_2'"
+          @click="
+            currentState === PartyPlanningSimState.VariableTotalPronto
+              ? (currentState = PartyPlanningSimState.Loop2)
+              : null
+          "
         />
         <Loop
           class="pl-10"
-          :class="['pseudocode', isRunning('loop_2') ? 'running' : '']"
+          :class="[
+            'pseudocode',
+            isRunning(PartyPlanningSimState.Loop2) ? 'running' : '',
+          ]"
         >
           <template #condition>
             <Operator operator="<">
@@ -222,21 +264,31 @@
           class="pl-10"
           :class="[
             'pseudocode',
-            'next-state',
-            isRunning('increment_itensProntos') ? 'running' : '',
+            isRunning(PartyPlanningSimState.IncrementItensProntos)
+              ? ['running', 'next-state']
+              : '',
           ]"
-          @click="openLoopDialog()"
+          @click="
+            currentState === PartyPlanningSimState.IncrementItensProntos
+              ? openLoopDialog()
+              : null
+          "
         />
         <Output
           class="pl-10"
           :class="[
             'pseudocode',
-            isRunning('write_itemPronto') ? 'running' : '',
+            isRunning(PartyPlanningSimState.WriteItemPronto) ? 'running' : '',
           ]"
         >
           <template #content>"O item {itemEscolhido} está pronto!"</template>
         </Output>
-        <Output :class="['pseudocode', isRunning('end_sim') ? 'running' : '']">
+        <Output
+          :class="[
+            'pseudocode',
+            isRunning(PartyPlanningSimState.Final) ? 'running' : '',
+          ]"
+        >
           <template #content>"A festa está pronta!!!"</template>
         </Output>
       </div>
@@ -246,6 +298,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { PartyPlanningSimState } from "@/enums";
 
 import ConditionalControl from "@/components/simulation/ConditionalControl.vue";
 import NavBar from "@/components/NavBar.vue";
@@ -278,7 +331,8 @@ export default defineComponent({
     Else,
   },
   data: () => ({
-    currentState: "initial",
+    PartyPlanningSimState: PartyPlanningSimState,
+    currentState: PartyPlanningSimState.Initial,
     items: [
       {
         name: "birthday_cake",
@@ -323,17 +377,17 @@ export default defineComponent({
       if (this.selectedItem == "birthday_cake") {
         this.total = 1;
         this.selectedItemName = "bolo";
-        this.currentState = "conditional_cake";
+        this.currentState = PartyPlanningSimState.ConditionalCake;
         this.printConditionalMessage = "Prepare 1 bolo!";
       } else if (this.selectedItem == "balloon") {
         this.total = 10;
         this.selectedItemName = "balão";
-        this.currentState = "conditional_balloon";
+        this.currentState = PartyPlanningSimState.ConditionalBalloon;
         this.printConditionalMessage = "Prepare 10 balões!";
       } else if (this.selectedItem == "party_candy") {
         this.total = 20;
         this.selectedItemName = "doce";
-        this.currentState = "conditional_candy";
+        this.currentState = PartyPlanningSimState.ConditionalCandy;
         this.printConditionalMessage = "Prepare 20 doces!";
       } else {
         console.error("No item selected");
@@ -343,10 +397,10 @@ export default defineComponent({
     },
     closeConditionalDialog(value: boolean) {
       this.shouldShowConditionalDialog = value;
-      this.currentState = "variable_totalPronto";
+      this.currentState = PartyPlanningSimState.VariableTotalPronto;
     },
     openLoopDialog() {
-      this.currentState = "write_itemPronto";
+      this.currentState = PartyPlanningSimState.WriteItemPronto;
       this.shouldShowLoopDialog = true;
     },
     closeLoopDialog(value: boolean) {
@@ -354,7 +408,10 @@ export default defineComponent({
 
       if (this.preparedItems === 3) {
         this.printEndSimMessage = "A festa está pronta!!!";
-        setTimeout(() => (this.currentState = "end_sim"), 500);
+        setTimeout(
+          () => (this.currentState = PartyPlanningSimState.Final),
+          500
+        );
         setTimeout(() => (this.shouldShowEndSimDialog = true), 500);
       } else {
         this.restartLoop();
@@ -373,24 +430,24 @@ export default defineComponent({
       }
 
       if (this.totalPrepared === this.total) {
-        this.currentState = "increment_itensProntos";
+        this.currentState = PartyPlanningSimState.IncrementItensProntos;
         this.preparedItems++;
         this.preparedItemsList.push(this.selectedItem);
         this.printLoopMessage = `O item ${this.selectedItemName} está pronto!`;
       }
     },
-    isRunning(codeState: string) {
-      return codeState == this.currentState;
+    isRunning(codeState: PartyPlanningSimState) {
+      return codeState === this.currentState;
     },
     restartLoop() {
-      this.currentState = "loop_1";
+      this.currentState = PartyPlanningSimState.Loop1;
       this.selectedItem = "";
       this.selectedItemName = "";
       this.total = 0;
       this.totalPrepared = 0;
     },
     restoreSim() {
-      this.currentState = "initial";
+      this.currentState = PartyPlanningSimState.Initial;
       this.selectedItem = "";
       this.selectedItemName = "";
       this.total = 0;
