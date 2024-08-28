@@ -1,13 +1,15 @@
 {
   "name": "logic-sims-mvp",
   "version": "0.0.0",
-  "private": true,
   "type": "module",
+  "homepage": "https://mariliatd.github.io/logic-sims-mvp/",
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "type-check": "vue-tsc --build --force"
   },
   "dependencies": {
