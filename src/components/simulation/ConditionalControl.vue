@@ -5,7 +5,12 @@
       <v-row>
         <v-col v-for="item in content" :key="item.name" :cols="item.size">
           <button @click="selectItem(item)" :disabled="isDisabled(item.name)">
-            <img :src="item.path" :alt="item.text" width="80px" height="80px" />
+            <img
+              :src="'src' + item.path"
+              :alt="item.text"
+              width="80px"
+              height="80px"
+            />
           </button>
         </v-col>
       </v-row>
