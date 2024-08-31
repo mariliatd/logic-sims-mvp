@@ -6,7 +6,7 @@
         <v-col v-for="item in content" :key="item.name" :cols="item.size">
           <button @click="selectItem(item)" :disabled="isDisabled(item.name)">
             <img
-              :src="'src' + item.path"
+              :src="`${base}assets/${item.path}`"
               :alt="item.text"
               width="80px"
               height="80px"
@@ -55,6 +55,10 @@ export default defineComponent({
     },
   },
 });
+</script>
+
+<script setup lang="ts">
+const base = import.meta.env.BASE_URL;
 </script>
 
 <style>
