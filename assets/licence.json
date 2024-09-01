@@ -1,0 +1,32 @@
+{
+  "bake.svg": {
+    "name": "Bake - SVG Repo",
+    "source": "https://www.svgrepo.com/svg/232917/bake",
+    "license": "CC0 License"
+  },
+  "birthday-cake.svg": {
+    "name": "Birthday cake - SVG Repo",
+    "source": "https://www.svgrepo.com/svg/404839/birthday-cake",
+    "license": "MIT License"
+  },
+  "balloon.svg": {
+    "name": "Balloon - SVG Repo",
+    "source": "https://www.svgrepo.com/svg/401165/balloon",
+    "license": "MIT License"
+  },
+  "gas-cylinder.svg": {
+    "name": "Gas Cylinder - SVG Repo",
+    "source": "https://www.svgrepo.com/svg/17415/gas-cylinder",
+    "license": "CC0 License"
+  },
+  "party-candy.svg": {
+    "name": "Cupcake muffin - SVG Repo",
+    "source": "https://www.svgrepo.com/svg/298609/cupcake-muffin",
+    "license": "CC0 License"
+  },
+  "plate.svg": {
+    "name": "Plate - SVG Repo",
+    "source": "https://www.svgrepo.com/svg/117954/plate",
+    "license": "CC0 License"
+  }
+}
