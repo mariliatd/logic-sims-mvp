@@ -1,6 +1,9 @@
 <template>
   <NavBar simName="Planejando a Festa" />
-  <SimPageTemplate @sim="restoreSim()">
+  <SimPageTemplate
+    @sim="restoreSim()"
+    :isCodeInteraction="codeInteractionStates.includes(currentState)"
+  >
     <template #workspace>
       <div class="sim-workspace">
         <div class="conditional-loop-box">
@@ -333,6 +336,13 @@ export default defineComponent({
   data: () => ({
     PartyPlanningSimState: PartyPlanningSimState,
     currentState: PartyPlanningSimState.Initial,
+    codeInteractionStates: [
+      PartyPlanningSimState.Initial,
+      PartyPlanningSimState.Loop1,
+      PartyPlanningSimState.VariableQuantidade,
+      PartyPlanningSimState.VariableTotalPronto,
+      PartyPlanningSimState.IncrementItensProntos,
+    ],
     items: [
       {
         name: "birthday_cake",

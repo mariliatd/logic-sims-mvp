@@ -17,7 +17,7 @@
           </div>
         </v-col>
         <v-col cols="4">
-          <div class="code-box">
+          <div :class="['code-box', isCodeInteraction ? 'blink' : '']">
             <p class="sub-title">Pseudocódigo</p>
             <slot name="pseudocode"></slot>
           </div>
@@ -31,6 +31,9 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
+  props: {
+    isCodeInteraction: { type: Boolean, default: false },
+  },
   methods: {
     restoreSim() {
       this.$emit("sim");
@@ -55,7 +58,6 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   margin: 1.2rem;
-  height: 85%; /* TODO: fix responsivity */
 }
 
 .restore-sim {
@@ -69,7 +71,17 @@ export default defineComponent({
   border: solid 0.12rem #1d2d44;
   border-radius: 1rem;
   margin: 1.2rem;
-  height: 85%; /* TODO: fix responsivity */
+  padding-bottom: 0.2rem;
+}
+
+.blink {
+  animation: blinking 1s alternate-reverse infinite;
+}
+
+@keyframes blinking {
+  to {
+    box-shadow: 0.12rem 0.12rem 0.36rem 0.36rem #3b5c8c;
+  }
 }
 
 .sub-title {
