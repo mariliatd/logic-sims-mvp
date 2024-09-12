@@ -2,15 +2,18 @@
   <div class="nav-container">
     <span class="title">{{ simName }}</span>
     <nav>
-      <a class="nav-link" href="#">Sobre a Simulação</a>
-      <a class="nav-link" href="#">Ajuda</a>
+      <a class="nav-link" href="#">Conceitos de programação</a>
     </nav>
   </div>
 </template>
 
-<script setup lang="ts">
-const props = defineProps({
-  simName: { type: String, required: true },
+<script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  props: {
+    simName: { type: String, required: true },
+  },
 });
 </script>
 

@@ -6,6 +6,9 @@
   >
     <template #workspace>
       <div class="sim-workspace">
+        <div>
+          <Instructions v-if="currentState === PartyPlanningSimState.Initial" />
+        </div>
         <div class="conditional-loop-box">
           <ConditionalControl
             v-if="currentState > PartyPlanningSimState.VariableQuantidade"
@@ -304,8 +307,8 @@ import { defineComponent } from "vue";
 import { PartyPlanningSimState } from "@/enums";
 
 import ConditionalControl from "@/components/simulation/ConditionalControl.vue";
-import NavBar from "@/components/NavBar.vue";
-import SimPageTemplate from "@/components/SimPageTemplate.vue";
+import NavBar from "@/components/template/NavBar.vue";
+import SimPageTemplate from "@/components/template/SimPageTemplate.vue";
 import LoopControl from "@/components/simulation/LoopControl.vue";
 import VariableDisplay from "@/components/simulation/VariableDisplay.vue";
 import OutputDialog from "@/components/simulation/OutputDialog.vue";
@@ -316,6 +319,7 @@ import Input from "@/components/pseudocode/Input.vue";
 import Output from "@/components/pseudocode/Output.vue";
 import If from "@/components/pseudocode/If.vue";
 import Else from "@/components/pseudocode/Else.vue";
+import Instructions from "@/components/template/Instructions.vue";
 
 export default defineComponent({
   components: {
@@ -332,6 +336,7 @@ export default defineComponent({
     Output,
     If,
     Else,
+    Instructions,
   },
   data: () => ({
     PartyPlanningSimState: PartyPlanningSimState,
@@ -504,6 +509,13 @@ export default defineComponent({
 
 .next-state {
   cursor: pointer;
+  animation: blinking 1s alternate-reverse infinite;
+}
+
+@keyframes blinking {
+  to {
+    box-shadow: 0.06rem 0.06rem 0.12rem 0.12rem #514e4e;
+  }
 }
 
 .running {
