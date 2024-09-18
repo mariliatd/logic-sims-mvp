@@ -2,17 +2,36 @@
   <div class="nav-container">
     <span class="title">{{ simName }}</span>
     <nav>
-      <a class="nav-link" href="#">Conceitos de programação</a>
+      <a class="nav-link" href="#" @click="shouldShowDialog = true"
+        >Conceitos de programação</a
+      >
     </nav>
   </div>
+  <ProgrammingConceptsDialog
+    :openDialog="shouldShowDialog"
+    buttonText="Fechar"
+    @closeDialog="closeDialog"
+  />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import ProgrammingConceptsDialog from "./ProgrammingConceptsDialog.vue";
 
 export default defineComponent({
+  components: {
+    ProgrammingConceptsDialog,
+  },
+  data: () => ({
+    shouldShowDialog: false,
+  }),
   props: {
     simName: { type: String, required: true },
+  },
+  methods: {
+    closeDialog(value: boolean) {
+      this.shouldShowDialog = value;
+    },
   },
 });
 </script>
