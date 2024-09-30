@@ -102,19 +102,74 @@
         </ul>
 
         <p class="mt-3">
-          Além disso, também temos os
-          <span class="dialog-fuzzy">operadores lógicos</span>, que são
-          utilizados para comparar dois valores. O resultado dessa comparação é
-          sempre um valor verdadeiro ou falso.
-        </p>
-        <p>Por exemplo:</p>
-        <p class="ml-5">
-          idade <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 12
+          Outra operação muito utilizada é a comparação entre duas expressões, a
+          qual tem como resultado um valor verdadeiro ou falso. Os
+          <span class="dialog-fuzzy">operadores de comparação</span> são:
         </p>
         <ul class="ml-10">
-          <li>idade > 20 (falso)</li>
-          <li>idade = 20 (falso)</li>
-          <li>idade < 10 (verdadeiro)</li>
+          <li>x = y (x é igual a y)</li>
+          Obs. Em linguagens de programação, é comum a sintaxe x == y para a
+          comparação de igual.
+          <li>x != y (x é diferente de y)</li>
+          <li>x > y (x é maior do que y)</li>
+          <li>x < y (x é menor do que y)</li>
+          <li>x >= y (x é maior ou igual a y)</li>
+          <li>x <= y (x é menor ou igual a y)</li>
+        </ul>
+
+        <p class="mt-3">
+          Além disso, também temos os
+          <span class="dialog-fuzzy">operadores lógicos</span>, que podem ser
+          usados para criar expressões condicionais complexas.
+        </p>
+        <ul class="ml-10">
+          <li>E (conjunção):</li>
+          <ul class="ml-5">
+            <li>x > 0 E x < 10</li>
+          </ul>
+          <p>
+            A operação só será verdadeira se as duas expressões forem
+            verdadeiras.
+          </p>
+          <p>
+            Por exemplo, se x
+            <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 12, o resultado
+            será falso e se x
+            <v-icon icon="mdi-arrow-left" size="20px"></v-icon>5, o reultado é
+            verdadeiro.
+          </p>
+        </ul>
+        <ul class="ml-10">
+          <li>OU (disjunção):</li>
+          <ul class="ml-5">
+            <li>x > 0 OU x < 10</li>
+          </ul>
+          <p>
+            A operação será verdadeira se uma das duas expressões forem
+            verdadeiras.
+          </p>
+          <p>
+            Por exemplo, se x
+            <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 12, o resultado
+            será verdadeiro e se x
+            <v-icon icon="mdi-arrow-left" size="20px"></v-icon>5, o reultado
+            também é verdadeiro.
+          </p>
+        </ul>
+        <ul class="ml-10">
+          <li>NÃO (negação):</li>
+          <ul class="ml-5">
+            <li>NÃO x > 0</li>
+          </ul>
+          <p>
+            A operação torna o valor verdadeiro em falso e o falso em
+            verdadeiro.
+          </p>
+          <p>
+            Ou seja, se x
+            <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 5, então x é
+            maior do que 0 (verdadeiro) e o resultado da expressão será falso.
+          </p>
         </ul>
       </div>
 
