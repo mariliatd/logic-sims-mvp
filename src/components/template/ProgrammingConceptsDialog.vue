@@ -88,17 +88,35 @@
           números:
         </p>
         <ul class="ml-10">
-          <li>
-            soma <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 1 + 1
-          </li>
-          <li>
+          <li>x + y (soma)</li>
+          <p>
+            Ex.: soma <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 1 + 1
+            (2)
+          </p>
+          <p class="ml-10">
             novo_numero <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 10 +
-            soma
-          </li>
-          <li>
-            divisao
-            <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 10 / soma
-          </li>
+            soma (12, pois utilizamos a variável do exemplo anterior)
+          </p>
+          <li>x - y (subtração)</li>
+          <p>
+            Ex.: numero <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 5 -
+            2 (3)
+          </p>
+          <li>x * y (multiplicação)</li>
+          <p>
+            Ex.: z <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 3 * 4
+            (12)
+          </p>
+          <li>x / y (divisao)</li>
+          <p>
+            Ex.: metade <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 10 /
+            2 (5)
+          </p>
+          <li>x % y (resto da divisão)</li>
+          <p>
+            Ex.: metade <v-icon icon="mdi-arrow-left" size="20px"></v-icon> 10 %
+            2 (0, pois ao dividir 10 por 2, o resto da divisão é 0)
+          </p>
         </ul>
 
         <p class="mt-3">
@@ -123,9 +141,9 @@
           usados para criar expressões condicionais complexas.
         </p>
         <ul class="ml-10">
-          <li>E (conjunção):</li>
+          <li><b>E</b> (conjunção):</li>
           <ul class="ml-5">
-            <li>x > 0 E x < 10</li>
+            <li>x > 0 <b>E</b> x < 10</li>
           </ul>
           <p>
             A operação só será verdadeira se as duas expressões forem
@@ -140,9 +158,9 @@
           </p>
         </ul>
         <ul class="ml-10">
-          <li>OU (disjunção):</li>
+          <li><b>OU</b> (disjunção):</li>
           <ul class="ml-5">
-            <li>x > 0 OU x < 10</li>
+            <li>x > 0 <b>OU</b> x < 10</li>
           </ul>
           <p>
             A operação será verdadeira se uma das duas expressões forem
@@ -157,9 +175,9 @@
           </p>
         </ul>
         <ul class="ml-10">
-          <li>NÃO (negação):</li>
+          <li><b>NÃO</b> (negação):</li>
           <ul class="ml-5">
-            <li>NÃO x > 0</li>
+            <li><b>NÃO</b> x > 0</li>
           </ul>
           <p>
             A operação torna o valor verdadeiro em falso e o falso em
