@@ -32,4 +32,11 @@
 .fuzzy {
   font-family: "Fuzzy Bubbles", sans-serif;
 }
+
+@media screen and (min-width: 360px) and (max-width: 1080px) {
+  .instructions-box {
+    width: 250px;
+    margin-left: 0;
+  }
+}
 </style>

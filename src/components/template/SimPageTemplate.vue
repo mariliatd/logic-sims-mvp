@@ -2,7 +2,7 @@
   <div class="template-box">
     <v-app>
       <v-row>
-        <v-col cols="8">
+        <v-col cols="7" md="8">
           <div class="sim-box">
             <div class="sim-workspace">
               <slot name="workspace"></slot>
@@ -16,7 +16,7 @@
             </div>
           </div>
         </v-col>
-        <v-col cols="4">
+        <v-col cols="5" md="4">
           <div class="code-box">
             <p class="sub-title">Pseudocódigo</p>
             <slot name="pseudocode"></slot>
@@ -78,5 +78,36 @@ export default defineComponent({
   border-radius: 1rem;
   padding: 0.2rem;
   margin: 0.6rem;
+}
+
+@media screen and (min-width: 360px) and (max-width: 1080px) {
+  .template-box {
+    top: 4.5rem;
+    bottom: 0.8rem;
+    left: 0.8rem;
+    right: 0.8rem;
+    overflow: auto;
+  }
+
+  .sim-box {
+    margin: 0.6rem;
+  }
+
+  .restore-sim {
+    position: absolute;
+    bottom: -16rem;
+    align-self: flex-end;
+  }
+
+  .code-box {
+    font-size: 1rem;
+    margin: 0.6rem;
+  }
+
+  .sub-title {
+    font-size: 1rem;
+    padding: 0.2rem;
+    margin: 0.4rem;
+  }
 }
 </style>

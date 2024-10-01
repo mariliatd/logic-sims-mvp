@@ -522,4 +522,17 @@ export default defineComponent({
   background-color: #e9e8e8;
   border-radius: 1rem;
 }
+
+@media screen and (min-width: 360px) and (max-width: 1080px) {
+  .sim-workspace {
+    display: flex;
+    width: 100%;
+    height: 100%;
+  }
+
+  .variable-display {
+    margin-left: -2rem;
+    margin-bottom: 30rem;
+  }
+}
 </style>

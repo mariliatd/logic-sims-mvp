@@ -3,17 +3,15 @@
     <img
       src="@/assets/bake.svg"
       alt="fogão"
-      width="200px"
-      height="200px"
       @click="incrementCounter()"
       class="counter-increment"
+      id="bake-img"
     />
     <div v-for="index in totalPrepared" :key="index" id="cake-prepared">
       <img
         src="@/assets/birthday-cake.svg"
         alt="bolo de aniversário"
-        width="100px"
-        height="100px"
+        id="cake-img"
       />
     </div>
   </div>
@@ -22,20 +20,14 @@
       <img
         src="@/assets/gas-cylinder.svg"
         alt="cilindro de gás"
-        width="200px"
-        height="200px"
         @click="incrementCounter()"
         class="counter-increment"
+        id="cylinder-img"
       />
     </div>
     <div id="balloon-box">
       <div v-for="index in totalPrepared" :key="index" id="balloon-prepared">
-        <img
-          src="@/assets/balloon.svg"
-          alt="balão"
-          width="100px"
-          height="100px"
-        />
+        <img src="@/assets/balloon.svg" alt="balão" id="balloon-img" />
       </div>
     </div>
   </div>
@@ -44,19 +36,16 @@
       <img
         src="@/assets/plate.svg"
         alt="prato"
-        width="250px"
-        height="200px"
         @click="incrementCounter()"
-        class="counter-increment"
+        class="counter-increment plate-img"
+        id="left-plate"
       />
       <img
         src="@/assets/plate.svg"
         alt="prato"
-        width="250px"
-        height="200px"
-        style="margin-left: -3rem"
         @click="incrementCounter()"
-        class="counter-increment"
+        class="counter-increment plate-img"
+        id="right-plate"
       />
     </div>
     <div id="candy-box">
@@ -64,8 +53,7 @@
         <img
           src="@/assets/party-candy.svg"
           alt="doce de festa"
-          width="50px"
-          height="50px"
+          id="candy-img"
         />
       </div>
     </div>
@@ -104,9 +92,19 @@ export default defineComponent({
   display: flex;
 }
 
+#bake-img {
+  width: 200px;
+  height: 200px;
+}
+
 #cake-prepared {
   align-self: flex-start;
   margin-left: 25%;
+}
+
+#cake-img {
+  width: 100px;
+  height: 100px;
 }
 
 #balloon-box {
@@ -119,16 +117,35 @@ export default defineComponent({
   justify-content: center;
 }
 
+#cylinder-img {
+  width: 200px;
+  height: 200px;
+}
+
 #balloon-prepared {
   align-self: flex-start;
   margin-top: -20rem;
   margin-left: -2rem;
 }
 
+#balloon-img {
+  width: 100px;
+  height: 100px;
+}
+
 #plate-candy-box {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.plate-img {
+  width: 250px;
+  height: 200px;
+}
+
+#right-plate {
+  margin-left: -3rem;
 }
 
 #candy-box {
@@ -140,5 +157,61 @@ export default defineComponent({
   align-self: flex-start;
   margin-top: -11.3rem;
   margin-left: -2rem;
+}
+
+#candy-img {
+  width: 50px;
+  height: 50px;
+}
+
+@media screen and (min-width: 360px) and (max-width: 1080px) {
+  #bake-img {
+    width: 100px;
+    height: 100px;
+  }
+
+  #cake-img {
+    width: 50px;
+    height: 50px;
+  }
+
+  #balloon-box {
+    margin-left: 25%;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 0;
+    gap: 4rem 0;
+    justify-content: center;
+  }
+
+  #cylinder-img {
+    width: 100px;
+    height: 100px;
+  }
+
+  #balloon-img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .plate-img {
+    width: 125px;
+    height: 100px;
+  }
+
+  #right-plate {
+    margin-left: -14rem;
+  }
+
+  #candy-prepared {
+    margin-top: -5.8rem;
+    margin-left: -1rem;
+  }
+
+  #candy-img {
+    width: 25px;
+    height: 25px;
+  }
 }
 </style>

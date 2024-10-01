@@ -53,4 +53,20 @@ export default defineComponent({
 .number {
   font-size: 1.8rem;
 }
+
+@media screen and (min-width: 360px) and (max-width: 1080px) {
+  .value {
+    border-radius: 0.6rem;
+    width: 40px;
+    height: 40px;
+  }
+
+  .text {
+    font-size: 1rem;
+  }
+
+  .number {
+    font-size: 1rem;
+  }
+}
 </style>

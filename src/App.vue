@@ -14,4 +14,10 @@ body {
   font-size: 1.3rem;
   color: #1d2d44;
 }
+
+@media screen and (min-width: 360px) and (max-width: 1080px) {
+  body {
+    font-size: 0.9rem;
+  }
+}
 </style>

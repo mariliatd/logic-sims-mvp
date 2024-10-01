@@ -5,12 +5,7 @@
       <v-row>
         <v-col v-for="item in content" :key="item.name" :cols="item.size">
           <button @click="selectItem(item)" :disabled="isDisabled(item.name)">
-            <img
-              :src="`${base}assets/${item.path}`"
-              :alt="item.text"
-              width="80px"
-              height="80px"
-            />
+            <img :src="`${base}assets/${item.path}`" :alt="item.text" />
           </button>
         </v-col>
       </v-row>
@@ -84,6 +79,11 @@ const base = import.meta.env.BASE_URL;
   margin-bottom: 0.5rem;
 }
 
+img {
+  width: 80px;
+  height: 80px;
+}
+
 .amount-control {
   border: solid 0.12rem #1d2d44;
   border-radius: 1rem;
@@ -117,5 +117,30 @@ button:disabled {
 
 .item-label {
   text-align: center;
+}
+
+@media screen and (min-width: 360px) and (max-width: 1080px) {
+  .item-control {
+    border: solid 0.12rem #1d2d44;
+    border-radius: 1rem;
+    background-color: #e9e8e8;
+    width: 200px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    padding: 0 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  img {
+    width: 35px;
+    height: 35px;
+  }
+
+  .amount-control {
+    width: 200px;
+    height: 40px;
+    padding: 0 0.5rem;
+  }
 }
 </style>

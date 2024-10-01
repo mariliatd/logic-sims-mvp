@@ -74,4 +74,18 @@ nav {
   background-color: #69b7da;
   border-radius: 1rem;
 }
+
+@media screen and (min-width: 360px) and (max-width: 1080px) {
+  .title {
+    font-size: 1.5rem;
+  }
+
+  nav {
+    margin-right: 0.5rem;
+  }
+
+  .nav-link {
+    padding: 0.5rem 1rem;
+  }
+}
 </style>
