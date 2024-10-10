@@ -128,7 +128,12 @@
           <li>x = y (x é igual a y)</li>
           Obs. Em linguagens de programação, é comum a sintaxe x == y para a
           comparação de igual.
-          <li>x != y (x é diferente de y)</li>
+          <li>
+            x<v-icon icon="mdi-not-equal-variant" size="20px"></v-icon>y (x é
+            diferente de y)
+          </li>
+          Obs. Em linguagens de programação, é comum a sintaxe x != y para a
+          comparação de diferença.
           <li>x > y (x é maior do que y)</li>
           <li>x < y (x é menor do que y)</li>
           <li>x >= y (x é maior ou igual a y)</li>
