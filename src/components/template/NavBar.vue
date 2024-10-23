@@ -2,9 +2,9 @@
   <div class="nav-container">
     <span class="title">{{ simName }}</span>
     <nav>
-      <a class="nav-link" href="#" @click="shouldShowDialog = true"
-        >Conceitos de programação</a
-      >
+      <a class="nav-link" href="#" @click="shouldShowDialog = true">
+        Conceitos de programação
+      </a>
     </nav>
   </div>
   <ProgrammingConceptsDialog

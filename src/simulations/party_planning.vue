@@ -255,18 +255,21 @@
           </template>
           <template #instructions>
             <p class="pl-7">prepare 1 <Variable name="{itemEscolhido}" /></p>
-            <Variable
-              name="totalPronto"
-              value="totalPronto + 1"
-              :isAssignment="true"
-              class="pl-7"
-            />
+            <Variable name="totalPronto" :valueHasOperation="true" class="pl-7">
+              <template #operation>
+                <Operator operator="+">
+                  <template #leftExpression>
+                    <Variable name="totalPronto" />
+                  </template>
+                  <template #rightExpression>1</template>
+                </Operator>
+              </template>
+            </Variable>
           </template>
         </Loop>
         <Variable
           name="itensProntos"
-          value="itensProntos + 1"
-          :isAssignment="true"
+          :valueHasOperation="true"
           class="pl-10"
           :class="[
             'pseudocode',
@@ -279,7 +282,16 @@
               ? openLoopDialog()
               : null
           "
-        />
+        >
+          <template #operation>
+            <Operator operator="+">
+              <template #leftExpression>
+                <Variable name="itensProntos" />
+              </template>
+              <template #rightExpression>1</template>
+            </Operator>
+          </template>
+        </Variable>
         <Output
           class="pl-10"
           :class="[
@@ -287,7 +299,9 @@
             isRunning(PartyPlanningSimState.WriteItemPronto) ? 'running' : '',
           ]"
         >
-          <template #content>"O item {itemEscolhido} está pronto!"</template>
+          <template #content>
+            "O item <Variable name="{itemEscolhido}" /> está pronto!"
+          </template>
         </Output>
         <Output
           :class="[
